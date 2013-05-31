@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Datebase.cs" />
+    <Compile Include="Attributes\DBValueType.cs" />
     <Compile Include="Attributes\Default.cs" />
     <Compile Include="Attributes\ForeignKey.cs" />
     <Compile Include="Attributes\Identity.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="MYDBCondition.cs" />
     <Compile Include="MYDBConditionType.cs" />
     <Compile Include="MYDBEXE.cs" />
+    <Compile Include="MYDBFunction.cs" />
     <Compile Include="MYDBLogic.cs" />
     <Compile Include="MYDBQJoin.cs" />
     <Compile Include="MYDBQUnion.cs" />
@@ -69,7 +71,13 @@
     <Compile Include="SqlServer\SqlServerTable.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DB.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="DB.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServer\SqlFunctions\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

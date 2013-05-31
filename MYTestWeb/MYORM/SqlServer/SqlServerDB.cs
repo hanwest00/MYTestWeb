@@ -23,7 +23,7 @@ namespace MYORM.SqlServer
         /// <returns>SqlServerDB 实例</returns>
         public static SqlServerDB GetInstance()
         {
-            
+
             object lockObj = new object();
 
             System.Threading.Monitor.Enter(lockObj);
@@ -80,20 +80,11 @@ namespace MYORM.SqlServer
             }
         }
 
-        protected override bool TableContians(Type table, out string tableName)
+        protected override bool TableContians(Type table, string tableName)
         {
             try
             {
-                Table attr = Attribute.GetCustomAttribute(table, typeof(Table)) as Table;
-                if (attr != null)
-                    tableName = attr.Name;
-                else
-                    tableName = table.Name;
-
-                int ret = 0;
-                if (attr != null)
-                    ret = (int)dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 from sysobjects where name='{0}' and type='U'", tableName), null);
-                return ret == 1;
+                return (int)dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 from sysobjects where name='{0}' and type='U'", tableName), null) == 1;
             }
             catch (Exception e)
             {
@@ -101,10 +92,9 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override int CreateTable(Type table)
+        public override int CreateTable(Type table, string tableName)
         {
-            string tableName = string.Empty;
-            if (TableContians(table, out tableName))
+            if (TableContians(table, tableName))
                 return 0;
 
             try
@@ -120,6 +110,34 @@ namespace MYORM.SqlServer
                     firstItem = false;
                     sb.Append(s.Name);
                     sb.Append(" ");
+                    DBValueType valueType = Attribute.GetCustomAttribute(s, typeof(DBValueType)) as DBValueType;
+                    if (valueType != null)
+                    {
+                        sb.Append(valueType.ValueType);
+                    }
+                    else
+                    {
+                        switch (s.GetType().Name.ToLower())
+                        {
+                            case "int":
+                            case "int?":
+                                sb.Append("int");
+                                break;
+                            case "float":
+                            case "float?":
+                                sb.Append("float");
+                                break;
+                            case "string":
+                                sb.Append("nvachar(1000)");
+                                break;
+                            case "datetime":
+                                sb.Append("datetime");
+                                break;
+                            case "byte []":
+                                sb.Append("binary(10000)");
+                                break;
+                        }
+                    }
                     sb.Append(s.GetType().Name);
                     PrimaryKey attrPrimaryKey = Attribute.GetCustomAttribute(s, typeof(PrimaryKey)) as PrimaryKey;
                     if (attrPrimaryKey != null)
@@ -167,10 +185,9 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override int DropTable(Type table)
+        public override int DropTable(Type table, string tableName)
         {
-            string tableName = string.Empty;
-            if (TableContians(table, out tableName))
+            if (TableContians(table, tableName))
                 return 0;
 
             try

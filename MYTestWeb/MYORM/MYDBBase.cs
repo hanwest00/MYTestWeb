@@ -27,12 +27,12 @@ namespace MYORM
 
         protected abstract bool DBContians();
 
-        protected abstract bool TableContians(Type table, out string tableName);
+        protected abstract bool TableContians(Type table, string tableName);
 
         protected abstract int CreateDatebase();
 
-        public abstract int CreateTable(Type table);
+        public abstract int CreateTable(Type table, string tableName);
 
-        public abstract int DropTable(Type table);
+        public abstract int DropTable(Type table, string tableName);
     }
 }

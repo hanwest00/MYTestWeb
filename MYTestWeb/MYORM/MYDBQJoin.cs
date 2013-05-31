@@ -9,9 +9,9 @@ namespace MYORM
     public class MYDBQJoin : IToQueryable
     {
         private JoinType Type;
-        private MYDBCondition[] On;
+        private MYDBConditionold[] On;
         private string Table;
-        public MYDBQJoin(string table, JoinType type,params MYDBCondition[] on)
+        public MYDBQJoin(string table, JoinType type,params MYDBConditionold[] on)
         {
             Table = table;
             Type = type;

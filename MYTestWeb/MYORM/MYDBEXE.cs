@@ -21,49 +21,49 @@ namespace MYORM
             ConnectString = connString;
         }
 
-        public abstract int ExeNonQuery(string dbConnString, string queryString, DbParameter[] sqlParams);
+        public abstract int ExeNonQuery(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract int ExeNonQuery(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract int ExeNonQuery(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams);
+        public abstract int ExeNonQuery(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract DbDataReader ExeReader(string dbConnString, string queryString, DbParameter[] sqlParams);
+        public abstract DbDataReader ExeReader(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract DbDataReader ExeReader(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract DbDataReader ExeReader(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams);
+        public abstract DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbParameter[] sqlParams);
+        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams);
+        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbParameter[] sqlParams);
+        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams);
+        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract object ExeScalar(string dbConnString, string queryString, DbParameter[] sqlParams);
+        public abstract object ExeScalar(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract object ExeScalar(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract object ExeScalar(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract object ExeScalar(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams);
+        public abstract object ExeScalar(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract object ExeScalar(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams);
+        public abstract object ExeScalar(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
         protected abstract DbConnection MakeConnect(string dbConnString);
 
-        protected void MakeCommand(string queryString, CommandType type, DbTransaction tran, ref DbConnection conn, DbParameter[] sqlParams, out DbCommand command)
+        protected void MakeCommand(string queryString, CommandType type, DbTransaction tran, ref DbConnection conn, IList<DbParameter> sqlParams, out DbCommand command)
         {
             if (conn == null)
                 throw new ConnectionNullExpection("Connection null!");
@@ -77,8 +77,8 @@ namespace MYORM
                 command.CommandType = type;
                 if (tran != null)
                     command.Transaction = tran;
-                if (sqlParams.Length > 0)
-                    command.Parameters.AddRange(sqlParams);
+                if (sqlParams.Count > 0)
+                    command.Parameters.AddRange(sqlParams.ToArray());
             }
             catch (Exception e)
             {

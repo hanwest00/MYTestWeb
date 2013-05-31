@@ -34,22 +34,22 @@ namespace MYORM.SqlServer
 
         }
 
-        public override int ExeNonQuery(string dbConnString, string queryString, DbParameter[] sqlParams)
+        public override int ExeNonQuery(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
             return ExeNonQuery(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override int ExeNonQuery(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams)
+        public override int ExeNonQuery(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             return ExeNonQuery(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams)
+        public override int ExeNonQuery(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
             return ExeNonQuery(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams)
+        public override int ExeNonQuery(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DbConnection conn = null;
             DbCommand comm = null;
@@ -69,22 +69,22 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override DbDataReader ExeReader(string dbConnString, string queryString, DbParameter[] sqlParams)
+        public override DbDataReader ExeReader(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
             return ExeReader(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams)
+        public override DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
             return ExeReader(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override DbDataReader ExeReader(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams)
+        public override DbDataReader ExeReader(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             return ExeReader(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams)
+        public override DbDataReader ExeReader(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DbConnection conn = null;
             DbCommand comm = null;
@@ -100,22 +100,22 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbParameter[] sqlParams)
+        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
             return ExeReaderToDataTable(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams)
+        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
             return ExeReaderToDataTable(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams)
+        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             return ExeReaderToDataTable(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams)
+        public override DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DataTable ret = new DataTable();
             DbConnection conn = null;
@@ -142,22 +142,22 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbParameter[] sqlParams)
+        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
             return ExeReaderToList(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams)
+        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             return ExeReaderToList(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams)
+        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
             return ExeReaderToList(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams)
+        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DbDataReader reader = null;
             try
@@ -176,22 +176,22 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override object ExeScalar(string dbConnString, string queryString, DbParameter[] sqlParams)
+        public override object ExeScalar(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
             return ExeScalar(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override object ExeScalar(string dbConnString, string queryString, CommandType type, DbParameter[] sqlParams)
+        public override object ExeScalar(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
             return ExeScalar(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override object ExeScalar(string dbConnString, string queryString, DbTransaction tran, DbParameter[] sqlParams)
+        public override object ExeScalar(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             return ExeScalar(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override object ExeScalar(string dbConnString, string queryString, CommandType type, DbTransaction tran, DbParameter[] sqlParams)
+        public override object ExeScalar(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DbConnection conn = null;
             DbCommand comm = null;
