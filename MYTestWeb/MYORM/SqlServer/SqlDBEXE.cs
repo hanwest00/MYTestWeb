@@ -22,7 +22,7 @@ namespace MYORM.SqlServer
             System.Threading.Monitor.Enter(lockObj);
             if (instance == null)
                 instance = new SqlDBEXE(connString);
-            System.Threading.Monitor.Wait(lockObj);
+            System.Threading.Monitor.Exit(lockObj);
 
             return instance;
         }
@@ -142,28 +142,28 @@ namespace MYORM.SqlServer
             }
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, IList<DbParameter> sqlParams)
+        public override IList<T> ExeReaderToList<T>(string dbConnString, string queryString, IList<DbParameter> sqlParams)
         {
-            return ExeReaderToList(dbConnString, queryString, CommandType.Text, null, sqlParams);
+            return ExeReaderToList<T>(dbConnString, queryString, CommandType.Text, null, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
+        public override IList<T> ExeReaderToList<T>(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams)
         {
-            return ExeReaderToList(dbConnString, queryString, CommandType.Text, tran, sqlParams);
+            return ExeReaderToList<T>(dbConnString, queryString, CommandType.Text, tran, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
+        public override IList<T> ExeReaderToList<T>(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams)
         {
-            return ExeReaderToList(dbConnString, queryString, type, null, sqlParams);
+            return ExeReaderToList<T>(dbConnString, queryString, type, null, sqlParams);
         }
 
-        public override IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
+        public override IList<T> ExeReaderToList<T>(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams)
         {
             DbDataReader reader = null;
             try
             {
                 reader = ExeReader(dbConnString, queryString, type, tran, sqlParams);
-                return InfosBinder<MYItemBase>(reader);
+                return InfosBinder <T> (reader);
             }
             catch (Exception e)
             {

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MYORM.Interfaces;
+using MYORM.Conditions;
 
 namespace MYORM
 {
     public class MYDBQJoin : IToQueryable
     {
         private JoinType Type;
-        private MYDBConditionold[] On;
+        private Equal[] On;
         private string Table;
-        public MYDBQJoin(string table, JoinType type,params MYDBConditionold[] on)
+        public MYDBQJoin(string table, JoinType type, params Equal[] on)
         {
             Table = table;
             Type = type;
@@ -27,8 +28,6 @@ namespace MYORM
         { 
             StringBuilder sb = new StringBuilder();
             On.ToList().ForEach((s) => {
-                if (s.Type > MYDBConditionType.NOTEQUAL)
-                    return;
                sb.Append(s.ToQueryString());
             });
             return string.Format("{0} join {1} on {2}", Type.ToString(), Table, sb.ToString());

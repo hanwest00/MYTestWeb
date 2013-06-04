@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("MYORM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("HX MYORM")]
+[assembly: AssemblyDescription("HX MYORM")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HX")]
 [assembly: AssemblyProduct("MYORM")]
 [assembly: AssemblyCopyright("Copyright © HX 2013")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("HX")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型

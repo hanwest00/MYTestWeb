@@ -45,13 +45,13 @@ namespace MYORM
 
         public abstract DataTable ExeReaderToDataTable(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, IList<DbParameter> sqlParams);
+        public abstract IList<T> ExeReaderToList<T>(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
+        public abstract IList<T> ExeReaderToList<T>(string dbConnString, string queryString, DbTransaction tran, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
+        public abstract IList<T> ExeReaderToList<T>(string dbConnString, string queryString, CommandType type, IList<DbParameter> sqlParams);
 
-        public abstract IList<MYItemBase> ExeReaderToList(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
+        public abstract IList<T> ExeReaderToList<T>(string dbConnString, string queryString, CommandType type, DbTransaction tran, IList<DbParameter> sqlParams);
 
         public abstract object ExeScalar(string dbConnString, string queryString, IList<DbParameter> sqlParams);
 
@@ -77,7 +77,7 @@ namespace MYORM
                 command.CommandType = type;
                 if (tran != null)
                     command.Transaction = tran;
-                if (sqlParams.Count > 0)
+                if (sqlParams != null && sqlParams.Count > 0)
                     command.Parameters.AddRange(sqlParams.ToArray());
             }
             catch (Exception e)

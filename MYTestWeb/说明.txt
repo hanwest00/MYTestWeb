@@ -2,7 +2,6 @@
    1,使用attribute来映射数据库关系.
 
    2,分为db table item三种类型,
-   db与table之间的关系使用泛型维护一个table集合,
    table到db之间的关系用attribute,
    table到item之间的关系用<T>，
    item到table之间的关系用attribute.
@@ -10,7 +9,7 @@
    3,自动建立数据库
      1) sqlserver
         如果数据库不存在则自动创建，
-        创建前确保链接字符串的Database参数已经设置为Master或为空白,
+        创建前确保链接字符串的Database参数已经设置为Master,
         然后执行创建数据库sql创建之.
 		String str;
         SqlConnection myConn = new SqlConnection ("Server=localhost;Integrated security=SSPI;database=master");
@@ -44,8 +43,10 @@
 	    }
         }
 
-	4,语句实例化后的优先级
+	4,语句实例化后的优先级(未实现)
 
-	5,实现多个数据库的类库之后 需要一个抽象层来给上层调用
+	5,实现多个数据库的类库之后 需要一个抽象的接口层来给上层调用
 	  可以使用接口来做依赖注入 或者使用抽象工厂来创建类
+
+ORM已实现，下一步许实现一个cms来测试ORM的功能和性能
 	

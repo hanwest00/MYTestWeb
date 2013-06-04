@@ -8,14 +8,15 @@ namespace MYORM
 {
     public class MYDBQUnion : IToQueryable
     {
-        public MYDBQUnion()
-        { 
-           
+        private string tableName;
+        public MYDBQUnion(string table,bool all)
+        {
+            tableName = table;
         }
 
         public virtual string ToQueryString()
         {
-            return string.Empty;
+            return string.Format(" union {0} ",  tableName);
         }
     }
 }

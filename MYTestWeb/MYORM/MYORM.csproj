@@ -49,6 +49,18 @@
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Attributes\Unique.cs" />
     <Compile Include="Attributes\ValueNotNull.cs" />
+    <Compile Include="Conditions\Equal.cs" />
+    <Compile Include="Conditions\GroupBy.cs" />
+    <Compile Include="Conditions\In.cs" />
+    <Compile Include="Conditions\NotEqual.cs" />
+    <Compile Include="Conditions\More.cs" />
+    <Compile Include="Conditions\Less.cs" />
+    <Compile Include="Conditions\LessEqual.cs" />
+    <Compile Include="Conditions\Exists.cs" />
+    <Compile Include="Conditions\NotExists.cs" />
+    <Compile Include="Conditions\NotIn.cs" />
+    <Compile Include="Conditions\OrderBy.cs" />
+    <Compile Include="Conditions\Like.cs" />
     <Compile Include="Exceptions\ConnectionNullExpection.cs" />
     <Compile Include="Exceptions\CreateDBException.cs" />
     <Compile Include="Exceptions\TableContianException.cs" />
@@ -71,6 +83,7 @@
     <Compile Include="SqlServer\SqlServerTable.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conditions\MoreEqual.cs" />
     <None Include="ClassDiagram1.cd" />
     <None Include="DB.config">
       <SubType>Designer</SubType>

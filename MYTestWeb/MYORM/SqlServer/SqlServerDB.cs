@@ -42,6 +42,7 @@ namespace MYORM.SqlServer
             dbMasterConnectString = settingReader.GetValue("MYORMConnectionString", typeof(string)) as string;
             dbExe = SqlDBEXE.GetInstance(dbMasterConnectString);
             DatabaseName = settingReader.GetValue("DatabaseName", typeof(string)) as string;
+            
             DbFileDir = settingReader.GetValue("DatabaseDir", typeof(string)) as string;
             if (!DbFileDir.EndsWith("\\"))
                 DbFileDir += "\\";
@@ -52,12 +53,12 @@ namespace MYORM.SqlServer
 
         protected override bool DBContians()
         {
-            if (!dbMasterConnectString.ToLower().Contains("database=master"))
+            if (!dbMasterConnectString.ToLower().Contains("master"))
                 throw new CreateDBException("DBConnectString is wrong!");
 
             try
             {
-                return (int)dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 From master.dbo.sysdatabases where name='{0}'", DatabaseName), null) == 1;
+                return dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 from master.dbo.sysdatabases where name='{0}'", DatabaseName), null) != null;
             }
             catch (Exception e)
             {
@@ -67,12 +68,12 @@ namespace MYORM.SqlServer
 
         protected override int CreateDatebase()
         {
-            if (!dbMasterConnectString.ToLower().Contains("database=master"))
+            if (!dbMasterConnectString.ToLower().Contains("master"))
                 throw new CreateDBException("DBConnectString is wrong!");
 
             try
             {
-                return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("CREATE DATABASE {0} ON PRIMARY (NAME = MyDatabase_Data, FILENAME = '{1}{0}.mdf', SIZE = 2MB) LOG ON (NAME = MyDatabase_Log, FILENAME = '{1}{0}.ldf', SIZE = 1MB)", DatabaseName, DbFileDir), null);
+                return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("CREATE DATABASE {0} ON PRIMARY (NAME = MyDatabase_Data, FILENAME = '{1}{0}.mdf', SIZE = 3MB) LOG ON (NAME = MyDatabase_Log, FILENAME = '{1}{0}.ldf', SIZE = 1MB)", DatabaseName, DbFileDir), null);
             }
             catch (Exception e)
             {
@@ -84,7 +85,7 @@ namespace MYORM.SqlServer
         {
             try
             {
-                return (int)dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 from sysobjects where name='{0}' and type='U'", tableName), null) == 1;
+                return dbExe.ExeScalar(null, string.Format("select 1 from sysobjects where name='{0}' and type='U'", tableName), null) != null;
             }
             catch (Exception e)
             {
@@ -99,9 +100,9 @@ namespace MYORM.SqlServer
 
             try
             {
-                StringBuilder sb = new StringBuilder("create table ");
+                StringBuilder sb = new StringBuilder("create table [");
                 sb.Append(tableName);
-                sb.Append(" (");
+                sb.Append("] (");
                 bool firstItem = true;
                 table.GetProperties().ToList().ForEach(s =>
                 {
@@ -117,10 +118,10 @@ namespace MYORM.SqlServer
                     }
                     else
                     {
-                        switch (s.GetType().Name.ToLower())
+                        string propType = s.PropertyType.Name.ToLower();
+                        switch (propType)
                         {
-                            case "int":
-                            case "int?":
+                            case "int32":
                                 sb.Append("int");
                                 break;
                             case "float":
@@ -128,7 +129,7 @@ namespace MYORM.SqlServer
                                 sb.Append("float");
                                 break;
                             case "string":
-                                sb.Append("nvachar(1000)");
+                                sb.Append("nvarchar(1000)");
                                 break;
                             case "datetime":
                                 sb.Append("datetime");
@@ -136,9 +137,11 @@ namespace MYORM.SqlServer
                             case "byte []":
                                 sb.Append("binary(10000)");
                                 break;
+                            default :
+                                sb.Append(propType);
+                                break;
                         }
                     }
-                    sb.Append(s.GetType().Name);
                     PrimaryKey attrPrimaryKey = Attribute.GetCustomAttribute(s, typeof(PrimaryKey)) as PrimaryKey;
                     if (attrPrimaryKey != null)
                         sb.Append(" primary key");

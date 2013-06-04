@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Common;
 using MYORM.Attributes;
 
 namespace MYORM
@@ -10,6 +11,9 @@ namespace MYORM
     public abstract class MYTableBase<T> where T : MYItemBase
     {
         private static string tableName = string.Empty;
+        protected static StringBuilder whereQuery = new StringBuilder();
+        protected static StringBuilder joinQuery = new StringBuilder();
+        protected static DbParameter[] selectParams = null;
 
         public static Type TableType
         {
@@ -38,10 +42,11 @@ namespace MYORM
 
         public abstract void Insert(T item);
         public abstract void Delete(T item);
-        public abstract void Update(T item);
-        public abstract void Where(IList<MYDBCondition> conds);
+        public abstract void Delete(IList<MYDBCondition> conds);
+        public abstract void Update(T item, IList<MYDBCondition> conds);
+        public abstract void Where(IList<MYDBCondition> conds, DbParameter[] dbParams);
         public abstract void Join(params MYDBQJoin[] joinTables);
-        public abstract void Union(params MYDBQUnion[] Tables);
+        //public abstract void Union(params MYDBQUnion[] Tables);
         public abstract IList<T> Select(params string [] fields);
     }
 }
