@@ -65,6 +65,7 @@
     <Compile Include="Exceptions\CreateDBException.cs" />
     <Compile Include="Exceptions\TableContianException.cs" />
     <Compile Include="Exceptions\TableNotContianException.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
     <Compile Include="Interfaces\IToQueryable.cs" />
     <Compile Include="MYDBBase.cs" />
     <Compile Include="MYDBCondition.cs" />

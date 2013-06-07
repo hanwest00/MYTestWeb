@@ -1,32 +1,36 @@
-﻿using MYORM;
-using MYORM.Attributes;
+﻿using MYORM.Attributes;
 
 namespace Data.Tables
 {
-    public class User : MYItemBase
+    public class Logs : MYORM.MYItemBase
     {
         [PrimaryKey]
         [Identity(1,1)]
         [ValueNotNull]
         public int Id
-        { 
-            get; 
+        {
+            get;
             set;
         }
 
         [ValueNotNull]
-        public int GroupId
+        public string LogType
         {
             get;
             set;
         }
 
-        public string Name
+        [DBValueType("text")]
+        public string Content
         {
             get;
             set;
         }
 
-
+        public System.DateTime LogDate
+        {
+            get;
+            set;
+        }
     }
 }

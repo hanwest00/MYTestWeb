@@ -6,18 +6,9 @@ using MYORM.Attributes;
 
 namespace Data.Tables
 {
-    public class Group : MYORM.MYItemBase
+    public class Privilege : MYORM.MYItemBase
     {
-        [PrimaryKey]
-        [Identity(1, 1)]
-        [ValueNotNull]
         public int Id
-        {
-            get;
-            set;
-        }
-
-        public string Name
         {
             get;
             set;

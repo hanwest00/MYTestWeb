@@ -8,7 +8,7 @@ using System.Data.Common;
 
 namespace MYORM.SqlServer
 {
-    public class SqlServerTable<T> : MYTableBase<T> where T : MYItemBase
+    public class SqlServerTable<T> : MYTableBase<T>, Interfaces.ITable<T> where T : MYItemBase
     {
         private SqlServerDB sqlDB = SqlServerDB.GetInstance();
 

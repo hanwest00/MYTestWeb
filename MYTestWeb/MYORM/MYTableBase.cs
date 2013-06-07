@@ -8,7 +8,7 @@ using MYORM.Attributes;
 
 namespace MYORM
 {
-    public abstract class MYTableBase<T> where T : MYItemBase
+    public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYItemBase
     {
         private static string tableName = string.Empty;
         protected static StringBuilder whereQuery = new StringBuilder();

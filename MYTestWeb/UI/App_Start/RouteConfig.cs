@@ -18,6 +18,12 @@ namespace UI
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Error",
+                url: "{controller}/{id}",
+                defaults: new { controller = "Error", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }

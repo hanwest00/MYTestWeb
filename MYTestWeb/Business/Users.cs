@@ -5,13 +5,14 @@ using System.Text;
 using Data.Tables;
 using MYORM.SqlServer;
 using MYORM;
+using MYORM.Interfaces;
 using MYORM.Conditions;
 
 namespace Business
 {
     public class Users
     {
-        private static SqlServerTable<User> user = SqlServerTable<User>.GetInstance();
+        private static ITable<User> user = SqlServerTable<User>.GetInstance();
 
         public void Insert(User item)
         {
@@ -37,6 +38,7 @@ namespace Business
             }, new System.Data.SqlClient.SqlParameter[] { 
                 new System.Data.SqlClient.SqlParameter("@Id", "12") 
             });
+
             return user.Select("Id", "GroupId", "Name");
         }
     }

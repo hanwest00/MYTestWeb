@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{635D2502-EFE6-4DCB-B09B-152E9B711EA0}</ProjectGuid>
+    <ProjectGuid>{981757BE-8D06-49FB-A5D1-6056D70BA9A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Data</RootNamespace>
-    <AssemblyName>Data</AssemblyName>
+    <RootNamespace>Util</RootNamespace>
+    <AssemblyName>Util</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,13 +40,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Log\LogIoc.cs" />
+    <Compile Include="Log\LogToDb.cs" />
+    <Compile Include="Log\MYLog\Action.cs" />
+    <Compile Include="Log\MYLog\Error.cs" />
+    <Compile Include="Log\ILog.cs" />
+    <Compile Include="Log\ILogFactory.cs" />
+    <Compile Include="Log\Log.cs" />
+    <Compile Include="Log\LogFactory.cs" />
+    <Compile Include="Log\MYLog\System.cs" />
+    <Compile Include="Log\MYLog\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tables\Group.cs" />
-    <Compile Include="Tables\Logs.cs" />
-    <Compile Include="Tables\Privilege.cs" />
-    <Compile Include="Tables\User.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{635D2502-EFE6-4DCB-B09B-152E9B711EA0}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYIoc\MYIoc.csproj">
+      <Project>{0A4C84ED-E1B9-4912-96A2-EE48B14C2E41}</Project>
+      <Name>MYIoc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYLog\MYLog.csproj">
+      <Project>{6A59F3B8-E4CE-4F28-A4E5-E9A764F48672}</Project>
+      <Name>MYLog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MYORM\MYORM.csproj">
       <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
       <Name>MYORM</Name>
