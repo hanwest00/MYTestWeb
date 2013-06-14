@@ -125,6 +125,7 @@ namespace MYORM.SqlServer
             {
                 conn = MakeConnect(dbConnString);
                 MakeCommand(queryString, type, tran, ref conn, sqlParams, out comm);
+
                 adp = new SqlDataAdapter(comm as SqlCommand);
                 adp.Fill(ret);
                 return ret;

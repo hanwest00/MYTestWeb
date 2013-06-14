@@ -5,6 +5,8 @@ using System.Text;
 using MYORM.Attributes;
 using System.Data.SqlClient;
 using System.Data.Common;
+using System.Runtime.InteropServices;
+using System.CodeDom;
 
 namespace MYORM.SqlServer
 {
@@ -40,6 +42,7 @@ namespace MYORM.SqlServer
 
         public override void Insert(T item)
         {
+
             bool firstPorp = true;
             StringBuilder sb = new StringBuilder("insert into [");
             StringBuilder valueSb = new StringBuilder("values(");
@@ -54,7 +57,6 @@ namespace MYORM.SqlServer
                         return;
 
                     object propValue = s.GetValue(item, null);
-
                     if (propValue != null)
                     {
                         if (!firstPorp)

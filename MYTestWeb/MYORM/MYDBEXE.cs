@@ -122,6 +122,7 @@ namespace MYORM
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         System.Reflection.PropertyInfo pInfo = infoType.GetProperty(reader.GetName(i));
+
                         if (pInfo == null)
                             continue;
                         pInfo.SetValue(model, reader[i] == null ? null : reader[i], null);
