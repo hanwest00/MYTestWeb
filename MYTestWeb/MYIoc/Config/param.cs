@@ -7,7 +7,7 @@ namespace MYIoc.Config
 {
     public class param
     {
-        public string Type
+        public System.Type Type
         {
             get;
             set;

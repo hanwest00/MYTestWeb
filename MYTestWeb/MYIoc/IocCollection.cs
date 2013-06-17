@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MYIoc.Config;
 
 namespace MYIoc
 {
     public class IocContains
     {
-        private Dictionary<Type, List<Type>> typeCollection;
+        private IDictionary<Type, IList<register>> typeCollection;
 
         public IocContains()
         {
-            typeCollection = new Dictionary<Type, List<Type>>();
+            typeCollection = new Dictionary<Type, IList<register>>();
         }
 
         public void RegisterType<T, TTO>()
@@ -21,11 +22,14 @@ namespace MYIoc
 
             if (!map.IsInterface || (to.GetInterface(map.Name) == null)) return;
 
-            List<Type> toList = this.typeCollection[map];
+            IList<register> toList = this.typeCollection[map];
             if (toList != null)
-                toList.Add(to);
-            else
-                this.typeCollection.Add(map, new List<Type>() { to });
+            {
+                toList = new List<register>();
+                this.typeCollection.Add(map, toList);
+            }
+
+            toList.Add(new register { Type = to, MapTo = map });
         }
 
         public void RegisterTypeFromConfig(string configPath)
@@ -35,7 +39,7 @@ namespace MYIoc
 
         public T Resolve<T>()
         {
-            Type objType = this.typeCollection[typeof(T)][0];
+            Type objType = this.typeCollection[typeof(T)][0].Type;
             return (T)objType.Assembly.CreateInstance(objType.FullName);
         }
 
@@ -43,11 +47,12 @@ namespace MYIoc
         {
             System.Configuration.ConfigXmlDocument cfgDom = new System.Configuration.ConfigXmlDocument();
             cfgDom.Load(System.AppDomain.CurrentDomain.BaseDirectory + "MYIoc.config");
-            
+
 
             IList<T> ret = new List<T>();
-            this.typeCollection[typeof(T)].ToList().ForEach(s => {
-                ret.Add((T)s.Assembly.CreateInstance(s.FullName));
+            this.typeCollection[typeof(T)].ToList().ForEach(s =>
+            {
+                ret.Add((T)s.Type.Assembly.CreateInstance(s.Type.FullName));
             });
             return ret;
         }

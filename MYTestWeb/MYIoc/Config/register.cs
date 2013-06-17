@@ -23,7 +23,7 @@ namespace MYIoc.Config
             set;
         }
 
-        public string Type
+        public System.Type Type
         {
             get;
             set;
@@ -35,7 +35,7 @@ namespace MYIoc.Config
             set;
         }
 
-        public string MapTo
+        public System.Type MapTo
         {
             get;
             set;
