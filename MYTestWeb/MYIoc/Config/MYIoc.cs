@@ -38,5 +38,10 @@ namespace MYIoc.Config
         {
             registers.Remove(registers.Where(w => w.Value == item).First().Key);
         }
+
+        public IEnumerable<register> GetRegisters()
+        {
+            for (int i = 0; i < registers.Count; i++) yield return this[i];
+        }
     }
 }

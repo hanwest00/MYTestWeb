@@ -13,6 +13,11 @@ namespace MYIoc.Config
             set;
         }
 
+        public int ParamCount
+        {
+            get { return parameters.Count; }
+        }
+
         private IDictionary<int, param> parameters;
 
         public param this[int index]
@@ -45,6 +50,11 @@ namespace MYIoc.Config
         public void Remove(param item)
         {
             parameters.Remove(parameters.Where(w => w.Value == item).First().Key);
+        }
+
+        public IEnumerable<param> GetParams()
+        {
+            for (int i = 0; i < ParamCount; i++) yield return this[i];
         }
     }
 }

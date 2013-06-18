@@ -52,7 +52,6 @@
     <Compile Include="Config\register.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Config\registerReader.cs" />
     <Compile Include="IocCollection.cs" />
     <Compile Include="MYIocConfigManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -185,6 +185,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MYIoc.default.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="MYIoc.config">
       <SubType>Designer</SubType>
     </Content>

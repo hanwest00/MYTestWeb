@@ -12,8 +12,9 @@ namespace Util.Log
         public static IList<ILog> GetInstance()
         {
             logContains = new MYIoc.IocContains();
-            logContains.RegisterType<ILog, Log>();
-            logContains.RegisterType<ILog, LogToDb>();
+            //logContains.RegisterType<ILog, Log>();
+            //logContains.RegisterType<ILog, LogToDb>();
+            logContains.RegisterTypeFromConfig();
             return logContains.Resolves<ILog>();
         }
     }

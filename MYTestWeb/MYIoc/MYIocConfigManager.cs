@@ -16,14 +16,12 @@ namespace MYIoc
         private const string CFG_MTHDNODE = "method";
         private const string CFG_PARAMNODE = "param";
 
-        private const XName ATTRI_TYPE = XName.Get("type");
-        private const XName ATTRI_NAME = XName.Get("name");
-        private const XName ATTRI_MAPTO = XName.Get("mapTo");
-        private const XName ATTRI_VALUE = XName.Get("value");
-        private const XName ATTRI_DEPEND = XName.Get("dependon");
+        private static XName ATTRI_TYPE = XName.Get("type");
+        private static XName ATTRI_NAME = XName.Get("name");
+        private static XName ATTRI_MAPTO = XName.Get("mapTo");
+        private static XName ATTRI_VALUE = XName.Get("value");
+        private static XName ATTRI_DEPEND = XName.Get("dependon");
         #endregion
-
-        private static ConfigXmlDocument cfgDom;
 
         private static IEnumerable<XElement> cfgNodeList;
 
@@ -40,7 +38,7 @@ namespace MYIoc
 
         private MYIocConfigManager()
         {
-            cfgNodeList = XDocument.Load(string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, CFG_FILE)).Elements();
+            cfgNodeList = XDocument.Load(string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, CFG_FILE)).Elements().First().Elements();
         }
 
         /// <summary>
@@ -77,8 +75,10 @@ namespace MYIoc
         private register XElementToRegister(XElement xElem)
         {
             if (xElem == null) return null;
-
-            register ret = new register { Name = xElem.Attribute(ATTRI_TYPE).Value, Type = this.GetAssType(xElem.Attribute(ATTRI_NAME).Value).GetType(), MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value).GetType() };
+            var Name = xElem.Attribute(ATTRI_NAME).Value;
+            var Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value);
+            var MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value);
+            register ret = new register { Name = xElem.Attribute(ATTRI_NAME).Value, Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value), MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value) };
             XElement c = xElem.Element(XName.Get(CFG_CSTRNODE));
             if (c != null)
             {
@@ -94,9 +94,9 @@ namespace MYIoc
                 ret.AddMethod(mtd);
             });
 
-            xElem.Elements(XName.Get(CFG_PROPNODE)).ToList().ForEach(s =>
+            xElem.Elements(XName.Get(CFG_PROPNODE)).ToList().ForEach(p =>
             {
-                ret.AddProperty(new property { dependon = s.Attribute(ATTRI_DEPEND).Value, Name = s.Attribute(ATTRI_NAME).Value });
+                ret.AddProperty(new property { dependon = p.Attribute(ATTRI_DEPEND).Value, Name = p.Attribute(ATTRI_NAME).Value });
             });
 
             return ret;
@@ -119,9 +119,7 @@ namespace MYIoc
 
         private System.Type GetAssType(string assString)
         {
-            System.Reflection.Assembly ass = System.Reflection.Assembly.Load(assString);
-            if (ass != null) return ass.GetType();
-            return null;
+            return System.Type.GetType(assString);
         }
     }
 }

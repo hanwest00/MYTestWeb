@@ -15,11 +15,11 @@ namespace UI.Controllers
 
         public ActionResult Index()
         {
-            Data.Tables.User user = new Data.Tables.User { GroupId = 0, Name = "121" };
-            Business.Users mng = new Users();
-            mng.Insert(user);
-            ViewBag.Info = mng.GetAll();
-            return View();
+            //Data.Tables.User user = new Data.Tables.User { GroupId = 0, Name = "121" };
+            //Business.Users mng = new Users();
+            //mng.Insert(user);
+            //ViewBag.Info = mng.GetAll();
+            //return View();
             throw new ArgumentNullException();
         }
     }
