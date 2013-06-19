@@ -11,9 +11,9 @@ namespace UI.Controllers
         public ActionResult Index(int Id)
         {
             if (Id == 1)
-                ViewBag.LogOk = App_GlobalResources.Resource.LogOk;
+                ViewBag.LogOk = Resources.Resource.LogOk;
             else
-                ViewBag.LogOk = App_GlobalResources.Resource.LogFail;
+                ViewBag.LogOk = Resources.Resource.LogFail;
             return View();
         }
 

@@ -1,19 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace UI.Controllers
 {
     public class BaseController : Controller
     {
+        //初始化语言环境配置
+        static BaseController()
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(WebUtil.WebConfigManager.DefaultLanguage);
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebUtil.WebConfigManager.DefaultLanguage);
+        }
+
         protected string Language
         {
             get
             {
-                if (Session["language"] == null)
-                    Session["language"] = "en-US";
+                if (Session["language"] == null) Session["language"] = WebUtil.WebConfigManager.DefaultLanguage;
                 return Session["language"].ToString();
             }
             set
@@ -21,12 +24,5 @@ namespace UI.Controllers
                 Session["language"] = value;
             }
         }
-
-        protected override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-            base.OnActionExecuting(filterContext);
-            App_GlobalResources.Resource.Culture = new System.Globalization.CultureInfo(Language);
-        }
-
     }
 }

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncryptHelper.cs" />
+    <Compile Include="FileExcute.cs" />
     <Compile Include="Log\LogIoc.cs" />
     <Compile Include="Log\LogToDb.cs" />
     <Compile Include="Log\MYLog\Action.cs" />

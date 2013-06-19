@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MYIoc.Config.constructor" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Config\constructor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MYIoc.Config.method" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAgAAAACAAABAQAAAAAgAAAAAAAAACAAAA=</HashCode>
+      <FileName>Config\method.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MYIoc.Config.MYIoc" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAABAAAAQAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Config\MYIoc.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYIoc.Config.param" Collapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAIAAAACAAAQAAAAAAAAA=</HashCode>
+      <FileName>Config\param.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYIoc.Config.property" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Config\property.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYIoc.Config.register" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAIAAAAAAAAAAAABAAAAAAQAAAAAAAgYAQAAQAAAAAE=</HashCode>
+      <FileName>Config\register.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYIoc.IocContains" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAACAAAWAAAAAAAAAAAAAAQAAAAAAQAAAAAA=</HashCode>
+      <FileName>IocCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYIoc.MYIocConfigManager" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAFSAAAAQAAAAAAQIQAAgBBBAACAAAAEAIBIAEQA=</HashCode>
+      <FileName>MYIocConfigManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MYIoc.Config.INode" Collapsed="true">
+    <Position X="3" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Config\INode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="新細明體" Size="9" />
+</ClassDiagram>

@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
 using MYIoc.Config;
@@ -8,7 +7,7 @@ namespace MYIoc
 {
     public class MYIocConfigManager
     {
-        #region constant
+        #region Constant
         private const string CFG_FILE = "MYIoc.config";
         private const string CFG_REGNODE = "register";
         private const string CFG_CSTRNODE = "constructor";
@@ -23,9 +22,10 @@ namespace MYIoc
         private static XName ATTRI_DEPEND = XName.Get("dependon");
         #endregion
 
-        private static IEnumerable<XElement> cfgNodeList;
-
+        #region Private variable
+        private static System.Collections.Generic.IEnumerable<XElement> cfgNodeList;
         private static MYIocConfigManager instance;
+        #endregion
 
         #region Singleton
         public static MYIocConfigManager GetInstance()
@@ -36,10 +36,14 @@ namespace MYIoc
         }
         #endregion
 
+        #region Constructor
         private MYIocConfigManager()
         {
             cfgNodeList = XDocument.Load(string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, CFG_FILE)).Elements().First().Elements();
         }
+        #endregion
+
+        #region Public method
 
         /// <summary>
         /// 获取整个配置实体
@@ -80,18 +84,12 @@ namespace MYIoc
             var MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value);
             register ret = new register { Name = xElem.Attribute(ATTRI_NAME).Value, Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value), MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value) };
             XElement c = xElem.Element(XName.Get(CFG_CSTRNODE));
-            if (c != null)
-            {
-                constructor cstr = new constructor();
-                this.AddParamsToItem(c, cstr);
-                ret.constructor = cstr;
-            }
+
+            if (c != null) ret.constructor = this.AddParamsToItem(c, new constructor()) as constructor;
 
             xElem.Elements(XName.Get(CFG_MTHDNODE)).ToList().ForEach(s =>
             {
-                method mtd = new method { Name = s.Attribute(ATTRI_NAME).Value };
-                this.AddParamsToItem(s, mtd);
-                ret.AddMethod(mtd);
+                ret.AddMethod(this.AddParamsToItem(s, new method { Name = s.Attribute(ATTRI_NAME).Value }) as method);
             });
 
             xElem.Elements(XName.Get(CFG_PROPNODE)).ToList().ForEach(p =>
@@ -102,24 +100,30 @@ namespace MYIoc
             return ret;
         }
 
-        private void AddParamsToItem(XElement elem, INode node)
+        private INode AddParamsToItem(XElement elem, INode node)
         {
             elem.Elements().ToList().ForEach(i =>
             {
-                if (i.Value == CFG_PARAMNODE)
+                if (i.Name.LocalName == CFG_PARAMNODE)
                     node.Add(new param
                     {
-                        dependon = i.Attribute(ATTRI_DEPEND).Value,
-                        Name = i.Attribute(ATTRI_NAME).Value,
-                        Type = this.GetAssType(i.Attribute(ATTRI_TYPE).Value).GetType(),
-                        value = i.Attribute(ATTRI_VALUE).Value
+                        dependon = i.Attribute(ATTRI_DEPEND) != null ? i.Attribute(ATTRI_DEPEND).Value : string.Empty,
+                        Name = i.Attribute(ATTRI_NAME) != null ? i.Attribute(ATTRI_NAME).Value : string.Empty,
+                        Type = i.Attribute(ATTRI_TYPE) != null ? this.GetAssType(i.Attribute(ATTRI_TYPE).Value) : null,
+                        value = i.Attribute(ATTRI_VALUE) != null ? i.Attribute(ATTRI_VALUE).Value : string.Empty
                     });
             });
+
+            return node;
         }
 
+        #endregion
+
+        #region Private method
         private System.Type GetAssType(string assString)
         {
             return System.Type.GetType(assString);
         }
+        #endregion
     }
 }
