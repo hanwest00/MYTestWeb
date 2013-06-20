@@ -13,16 +13,23 @@ namespace UI
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Index", action = "Index", id = UrlParameter.Optional }
+                name: "Error",
+                url: "Error/{id}",
+                defaults: new { controller = "Error", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(
-                name: "Error",
-                url: "{controller}/{id}",
-                defaults: new { controller = "Error", action = "Index", id = UrlParameter.Optional }
+                name: "Pages",
+                url: "Manager.html",
+                defaults: new { controller = "Pages", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Manager", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

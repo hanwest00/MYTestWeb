@@ -87,9 +87,6 @@
   <ItemGroup>
     <Compile Include="Conditions\MoreEqual.cs" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="DB.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlServer\SqlFunctions\" />

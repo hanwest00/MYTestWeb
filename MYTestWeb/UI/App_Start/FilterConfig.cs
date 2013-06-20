@@ -9,7 +9,7 @@ namespace UI
         {
             //添加全局异常捕获过滤
             filters.Add(new UI.Filters.ErrorFliters.ErrorFliter());
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new UI.Filters.PageFliters.PageFliter());
         }
     }
 }

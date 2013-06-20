@@ -136,19 +136,26 @@
     </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
-    <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\ManagerController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Filters\ErrorFliters\ErrorFliter.cs" />
+    <Compile Include="Filters\PageFliters\PageFliter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PagesService.cs" />
+    <Compile Include="Models\WebModels\Template.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebUtil\WebConfigManager.cs" />
+    <Compile Include="WebUtil\WebPathManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="HTMLPage1.htm" />
+    <Content Include="Templates\Default\config.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -161,7 +168,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\Logs\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\Pages\" />
+    <Folder Include="Widgets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -185,7 +193,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Index\Index.cshtml" />
+    <Content Include="Views\Manager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="MYLog.config">
@@ -237,6 +245,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Common.en-US.designer.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\WebControls\Pager.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Manager\PageManager.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 
-namespace HXMail.Common
+namespace Util
 {
     public class EncryptHelper
     {
