@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace UI.Controllers
 {
-    public class PagesController : Controller
+    public class PagesController : BaseController
     {
         //
         // GET: /Pages/
@@ -16,5 +16,10 @@ namespace UI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

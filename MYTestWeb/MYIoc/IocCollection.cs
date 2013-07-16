@@ -66,16 +66,16 @@ namespace MYIoc
             {
                 //如果出错移除name对应typeCollection的索引
                 if (!string.IsNullOrEmpty(reg.Name)) if (this.nameIndex.Keys.Contains(reg.Name)) this.nameIndex.Remove(reg.Name);
-                throw e;
+                throw;
             }
         }
 
         /// <summary>
         /// 读取配置文件来生成依赖注入
         /// </summary>
-        public void RegisterTypeFromConfig()
+        public void RegisterTypeFromConfig(string path)
         {
-            MYIocConfigManager.GetInstance().GetMYIoc().GetRegisters().ToList().ForEach(s =>
+            MYIocConfigManager.GetInstance(path).GetMYIoc().GetRegisters().ToList().ForEach(s =>
             {
                 this.RegisterType(s);
             });
@@ -84,7 +84,7 @@ namespace MYIoc
         public T Resolve<T>()
         {
             register reg = this.typeCollection[typeof(T)][0];
-            return this._resolve<T>(reg);
+            return this._resolve<T>(reg,null);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace MYIoc
         public T Resolve<T>(string name)
         {
             register reg = this.typeCollection.ToList()[nameIndex[name][0]].Value[nameIndex[name][1]];
-            return this._resolve<T>(reg);
+            return this._resolve<T>(reg,null);
         }
 
         public IList<T> Resolves<T>()
@@ -104,19 +104,50 @@ namespace MYIoc
             IList<T> retList = new List<T>();
             this.typeCollection[typeof(T)].ToList().ForEach(reg =>
             {
-                retList.Add(this._resolve<T>(reg));
+                retList.Add(this._resolve<T>(reg,null));
             });
             return retList;
         }
+
+        public T ResolveGeneric<T>(Type generic)
+        {
+            register reg = this.typeCollection[typeof(T)][0];
+            return this._resolve<T>(reg, generic);
+        }
+
+        public T ResolveGeneric<T>(string name,Type generic)
+        {
+            register reg = this.typeCollection.ToList()[nameIndex[name][0]].Value[nameIndex[name][1]];
+            return this._resolve<T>(reg, generic);
+        }
+
+        public IList<T> Resolves<T>(Type generic)
+        {
+            IList<T> retList = new List<T>();
+            this.typeCollection[typeof(T)].ToList().ForEach(reg =>
+            {
+                retList.Add(this._resolve<T>(reg, generic));
+            });
+            return retList;
+        }
+
         #endregion
 
         #region Private method
-        private T _resolve<T>(register reg)
+        /// <summary>
+        /// 把register解析为对象
+        /// </summary>
+        /// <typeparam name="T">返回类型</typeparam>
+        /// <param name="reg">register</param>
+        /// <param name="generic">如果返回类型为泛型，需要设置，通常null</param>
+        /// <returns></returns>
+        private T _resolve<T>(register reg,Type generic)
         {
             Type[] constrTypes = null;
             T ret = default(T);
 
             object[] objs = null;
+            if (reg.Type.IsGenericType && generic != null) reg.MapTo = reg.MapTo.MakeGenericType(generic);
             if (reg.constructor != null)
             {
                 if (reg.constructor.ParamCount > 0)

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace MYIoc.Config
 {
+    /// <summary>
+    /// 把配置文件中的register对象化
+    /// </summary>
     public class register
     {
         public IDictionary<int, method> methods

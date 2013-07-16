@@ -135,7 +135,7 @@ namespace MYORM.SqlServer
                                 sb.Append("datetime");
                                 break;
                             case "byte []":
-                                sb.Append("binary(10000)");
+                                sb.Append("binary(65535)");
                                 break;
                             default :
                                 sb.Append(propType);

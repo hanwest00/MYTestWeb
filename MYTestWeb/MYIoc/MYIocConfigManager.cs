@@ -5,10 +5,12 @@ using MYIoc.Config;
 
 namespace MYIoc
 {
+    /// <summary>
+    /// 解析配置文件返回对象化的内容
+    /// </summary>
     public class MYIocConfigManager
     {
         #region Constant
-        private const string CFG_FILE = "MYIoc.config";
         private const string CFG_REGNODE = "register";
         private const string CFG_CSTRNODE = "constructor";
         private const string CFG_PROPNODE = "property";
@@ -22,24 +24,31 @@ namespace MYIoc
         private static XName ATTRI_DEPEND = XName.Get("dependon");
         #endregion
 
+        public static string cfgPath
+        {
+            get;
+            private set;
+        }
+
         #region Private variable
         private static System.Collections.Generic.IEnumerable<XElement> cfgNodeList;
         private static MYIocConfigManager instance;
         #endregion
 
         #region Singleton
-        public static MYIocConfigManager GetInstance()
+        public static MYIocConfigManager GetInstance(string path)
         {
             object lockObj = new object();
-            lock (lockObj) if (instance == null) instance = new MYIocConfigManager();
+            lock (lockObj) if (instance == null || cfgPath != path) instance = new MYIocConfigManager(path);
             return instance;
         }
         #endregion
 
         #region Constructor
-        private MYIocConfigManager()
+        private MYIocConfigManager(string path)
         {
-            cfgNodeList = XDocument.Load(string.Format("{0}{1}", System.AppDomain.CurrentDomain.BaseDirectory, CFG_FILE)).Elements().First().Elements();
+            cfgNodeList = XDocument.Load(path).Elements().First().Elements();
+            cfgPath = path;
         }
         #endregion
 
@@ -70,7 +79,9 @@ namespace MYIoc
         {
             return XElementToRegister(cfgNodeList.Where(w => w.Attribute(ATTRI_NAME).Value == name).First());
         }
+        #endregion
 
+        #region Private method
         /// <summary>
         /// 解析XElement为register对象
         /// </summary>
@@ -117,9 +128,6 @@ namespace MYIoc
             return node;
         }
 
-        #endregion
-
-        #region Private method
         private System.Type GetAssType(string assString)
         {
             return System.Type.GetType(assString);

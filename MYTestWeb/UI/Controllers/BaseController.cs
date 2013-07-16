@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using System.Reflection;
 
 namespace UI.Controllers
 {
@@ -22,6 +23,18 @@ namespace UI.Controllers
             set
             {
                 Session["language"] = value;
+            }
+        }
+
+        protected string CurrentUser
+        {
+            get
+            {
+                return Session["currUser"].ToString();
+            }
+            set
+            {
+                Session["currUser"] = value;
             }
         }
     }

@@ -64,3 +64,18 @@ ORM已实现，下一步许实现一个cms来测试ORM的功能和性能
 ***********
 
 1，关于属性反射的后期优化现阶段未完成,希望可以使用emit，或者表达式树来实现，需要补充这方面的知识。
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+关于cms：
+1,预定义一批常用的调用控件
+/*2,可以在widget中自定义控件,自定义控件使用简单的模版语言 例如:<xx:LIST name="getXX" models="item,cate,user,order" relation="item in cate " getFieds="name=item.name,uname=user.name">.....
+  定义好后,可在模版中直接使用,如:
+  <ul>
+  [Widget:getXX]
+     <li>[name] - [uname]</li>
+  [/Widget:getXX]
+  </ul>*/
+  

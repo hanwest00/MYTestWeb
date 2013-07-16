@@ -16,7 +16,7 @@ namespace MYORM.SqlServer
 
         #region Singleton
         private static SqlServerTable<T> instance = null;
-        public static SqlServerTable<T> GetInstance()
+        public static Interfaces.ITable<T> GetInstance()
         {
             object lockObj = new object();
             lock (lockObj)
@@ -258,7 +258,7 @@ namespace MYORM.SqlServer
             }
             catch (Exception e)
             {
-                throw e;
+                throw;
             }
         }
     }

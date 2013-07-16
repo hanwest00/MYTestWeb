@@ -21,7 +21,7 @@ namespace UI.Models
                 var xml = new System.Xml.XmlDocument();
                 xml.LoadXml(string.Format("{0}config.xml", dir));
                 var node = xml.GetElementsByTagName("template")[0];
-                list.Add(new Template { Name = node.Attributes["name"].Value, Url = dir, ContentUrl = node.Attributes["contentfolder"].Value, TempImage = this.GetTempImage(s, dir) });
+                list.Add(new Template { Name = node.Attributes["name"].Value, Url = dir, ContentUrl = node.Attributes["contentfolder"].Value, TempImage = this.GetTempImage(dir, s) });
             });
 
             return list;

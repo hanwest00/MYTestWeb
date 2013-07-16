@@ -49,6 +49,7 @@
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Attributes\Unique.cs" />
     <Compile Include="Attributes\ValueNotNull.cs" />
+    <Compile Include="Conditions\Between.cs" />
     <Compile Include="Conditions\Equal.cs" />
     <Compile Include="Conditions\GroupBy.cs" />
     <Compile Include="Conditions\In.cs" />

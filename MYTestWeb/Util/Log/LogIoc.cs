@@ -14,7 +14,7 @@ namespace Util.Log
             logContains = new MYIoc.IocContains();
             //logContains.RegisterType<ILog, Log>();
             //logContains.RegisterType<ILog, LogToDb>();
-            logContains.RegisterTypeFromConfig();
+            logContains.RegisterTypeFromConfig(string.Format("{0}MYLogIoc.config", Util.WebPathManager.ConfigsUrl));
             return logContains.Resolves<ILog>();
         }
     }

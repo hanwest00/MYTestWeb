@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Data;
+using DataModels;
 using MYORM;
 
 namespace Util.Log
 {
     public class LogToDb : ILog
     {
-        private static MYORM.Interfaces.ITable<Data.Tables.Logs> log = MYORM.SqlServer.SqlServerTable<Data.Tables.Logs>.GetInstance();
+        private static MYORM.Interfaces.ITable<DataModels.Logs> log = MYORM.SqlServer.SqlServerTable<DataModels.Logs>.GetInstance();
         public bool Error(string message)
         {
             return WriteToDb("Error", message);
@@ -31,7 +31,7 @@ namespace Util.Log
         {
             try
             {
-                log.Insert(new Data.Tables.Logs
+                log.Insert(new DataModels.Logs
                 {
                     Content = message,
                     LogDate = DateTime.Now,
