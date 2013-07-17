@@ -164,7 +164,7 @@ namespace MYORM.SqlServer
             try
             {
                 reader = ExeReader(dbConnString, queryString, type, tran, sqlParams);
-                return InfosBinder <T> (reader);
+                return InfosBinder<T>(reader);
             }
             catch (Exception e)
             {

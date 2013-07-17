@@ -7,20 +7,20 @@ namespace DataModels
         [PrimaryKey]
         [Identity(1,1)]
         [ValueNotNull]
-        public int Id
+        public int id
         { 
             get; 
             set;
         }
 
         [ValueNotNull]
-        public int GroupId
+        public int groupId
         {
             get;
             set;
         }
 
-        public string Name
+        public string name
         {
             get;
             set;

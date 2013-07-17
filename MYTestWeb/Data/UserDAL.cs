@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataModels;
-using MYORM.SqlServer;
 using MYORM;
 using MYORM.Interfaces;
 using MYORM.Conditions;
@@ -12,11 +11,38 @@ namespace Data
 {
     public class UserDAL
     {
-        private static ITable<User> user = SqlServerTable<User>.GetInstance();
+        private static ITable<User> user = DataIoc<User>.GetData();
 
         public void Insert(User item)
         {
             user.Insert(item);
+        }
+
+        public void Update(User item)
+        {
+            user.Update(item, null);
+        }
+
+        /// <summary>
+        /// Update by name
+        /// </summary>
+        /// <param name="name"></param>
+        public void Update(User item, string name)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "name", name));
+            user.Update(item, conds);
+        }
+
+        /// <summary>
+        /// Update by id
+        /// </summary>
+        /// <param name="name"></param>
+        public void Update(User item, int id)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "id", id.ToString()));
+            user.Update(item, conds);
         }
 
         public void Remove(User item)
@@ -24,38 +50,48 @@ namespace Data
             user.Delete(item);
         }
 
+        /// <summary>
+        /// Remove by name
+        /// </summary>
+        /// <param name="name"></param>
         public void Remove(string name)
         {
             IList<MYDBCondition> conds = new List<MYDBCondition>();
-            conds.Add(new Equal(MYDBLogic.NOTSET, "name", name));
+            conds.Add(new Equal(MYDBLogic.AND, "name", name));
             user.Delete(conds);
         }
 
-        public IList<User> GetAll()
+        /// <summary>
+        /// Remove by id
+        /// </summary>
+        /// <param name="name"></param>
+        public void Remove(int id)
         {
-            user.Where(new List<MYDBCondition>() {
-                 new Equal(MYDBLogic.NOTSET,"Id","@Id")
-            }, new System.Data.SqlClient.SqlParameter[] { 
-                new System.Data.SqlClient.SqlParameter("@Id", "12") 
-            });
-
-            return user.Select("Id", "GroupId", "Name");
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "id", id.ToString()));
+            user.Delete(conds);
         }
 
-        public IList<User> GetAll(int? page, int? pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        public IList<User> GetAll(string[] fields,params MYDBCondition[] conds)
         {
-            string[] fields;
+            return this.GetAll(fields,null, null, null, conds);
+        }
+
+        public IList<User> GetAll(string[] fields,int? page, int? pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        {
+            //need update
             IList<MYDBCondition> condList = new List<MYDBCondition>();
             if (pageNum == null || page == null)
-                fields = new string[] { "Id", "GroupId", "Name" };
+                fields = new string[] { "id", "groupId", "name" };
             else
             {
-                if (pageOrder == null) pageOrder = new OrderBy("Id", "asc");
-                fields = new string[] { string.Format("row_number() over({0}) as row", pageOrder.ToQueryString()), "Id", "GroupId", "Name" };
-                condList.Add(new Between(MYDBLogic.NOTSET, "row", "@start", "@end"));
+                if (pageOrder == null) pageOrder = new OrderBy("id", "asc");
+                fields = new string[] { string.Format("row_number() over({0}) as row", pageOrder.ToQueryString()), "id", "groupId", "name" };
+                condList.Add(new Between(MYDBLogic.AND, "row", "@start", "@end"));
             }
 
-            conds.ToList().ForEach(s => {
+            conds.ToList().ForEach(s =>
+            {
                 condList.Add(s);
             });
 

@@ -48,5 +48,6 @@ namespace MYORM
         public abstract void Join(params MYDBQJoin[] joinTables);
         //public abstract void Union(params MYDBQUnion[] Tables);
         public abstract IList<T> Select(params string [] fields);
+        public abstract object SelectFeild(string fieldName, IList<MYDBCondition> conds);
     }
 }

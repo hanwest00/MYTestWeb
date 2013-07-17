@@ -98,7 +98,7 @@ namespace MYORM.SqlServer
                     if (propValue != null)
                     {
                         if (firstProp)
-                            sb.Append("where ");
+                            sb.Append(" where 1 = 1 ");
                         else
                             sb.Append(" and ");
                         firstProp = false;
@@ -125,7 +125,7 @@ namespace MYORM.SqlServer
             {
                 if (conds != null && conds.Count > 0)
                 {
-                    sb.Append("where ");
+                    sb.Append(" where 1 = 1 ");
                     conds.ToList().ForEach(s =>
                     {
                         sb.Append(s.ToQueryString());
@@ -169,7 +169,7 @@ namespace MYORM.SqlServer
 
                 if (conds != null && conds.Count > 0)
                 {
-                    sb.Append(" where ");
+                    sb.Append(" where 1 = 1 ");
                     conds.ToList().ForEach(s =>
                     {
                         sb.Append(s.ToQueryString());
@@ -237,6 +237,7 @@ namespace MYORM.SqlServer
                     });
                 else
                     sb.Append("*");
+
                 sb.Append(" from [");
                 sb.Append(TableName);
                 sb.Append("] ");
@@ -249,7 +250,7 @@ namespace MYORM.SqlServer
 
                 if (whereQuery.Length > 0)
                 {
-                    sb.Append("where ");
+                    sb.Append(" where 1 = 1 ");
                     sb.Append(whereQuery.ToString());
                     whereQuery.Clear();
                 }
@@ -260,6 +261,22 @@ namespace MYORM.SqlServer
             {
                 throw;
             }
+        }
+
+        public override object SelectFeild(string fieldName, IList<MYDBCondition> conds)
+        {
+            if (string.IsNullOrEmpty(fieldName)) return null;
+            StringBuilder sb = new StringBuilder("select ");
+            sb.Append(fieldName);
+            if (conds != null && conds.Count > 0)
+            {
+                sb.Append(" where 1 = 1 ");
+                conds.ToList().ForEach(s =>
+                {
+                    sb.Append(s.ToQueryString());
+                });
+            }
+            return sqlDB.dbExe.ExeScalar(null, sb.ToString(), null);
         }
     }
 }

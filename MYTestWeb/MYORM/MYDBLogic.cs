@@ -7,7 +7,6 @@ namespace MYORM
 {
     public enum MYDBLogic
     {
-        NOTSET,
         AND,
         OR
     }

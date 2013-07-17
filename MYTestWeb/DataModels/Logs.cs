@@ -7,21 +7,21 @@ namespace DataModels
         [PrimaryKey]
         [Identity(1,1)]
         [ValueNotNull]
-        public int Id
+        public int id
         {
             get;
             set;
         }
 
         [ValueNotNull]
-        public string LogType
+        public string logType
         {
             get;
             set;
         }
 
         [DBValueType("text")]
-        public string Content
+        public string content
         {
             get;
             set;

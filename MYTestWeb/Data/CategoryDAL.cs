@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataModels;
-using MYORM.SqlServer;
 using MYORM;
 using MYORM.Interfaces;
 using MYORM.Conditions;
@@ -19,27 +18,110 @@ namespace Data
             cate.Insert(item);
         }
 
+        public void Update(Category item)
+        {
+            cate.Update(item, null);
+        }
+
+        /// <summary>
+        /// Update by cateName
+        /// </summary>
+        /// <param name="name"></param>
+        public void Update(Category item, string cateName)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "cateName", cateName));
+            cate.Update(item, conds);
+        }
+
+        /// <summary>
+        /// Update by id
+        /// </summary>
+        /// <param name="name"></param>
+        public void Update(Category item, int id)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "id", id.ToString()));
+            cate.Update(item, conds);
+        }
+
+        /// <summary>
+        /// Update by pId
+        /// </summary>
+        /// <param name="name"></param>
+        public void Update(Category item, int pId)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "pId", pId.ToString()));
+            cate.Update(item, conds);
+        }
+
         public void Remove(Category item)
         {
             cate.Delete(item);
         }
 
+        /// <summary>
+        /// Update by cateName
+        /// </summary>
+        /// <param name="name"></param>
         public void Remove(string cateName)
         {
             IList<MYDBCondition> conds = new List<MYDBCondition>();
-            conds.Add(new Equal(MYDBLogic.NOTSET, "cateName", cateName));
+            conds.Add(new Equal(MYDBLogic.AND, "cateName", cateName));
             cate.Delete(conds);
         }
 
-        public IList<Category> GetAll()
+        /// <summary>
+        /// Update by id
+        /// </summary>
+        /// <param name="name"></param>
+        public void Remove(int id)
         {
-            cate.Where(new List<MYDBCondition>() {
-                 new Equal(MYDBLogic.NOTSET,"Id","@Id")
-            }, new System.Data.SqlClient.SqlParameter[] { 
-                new System.Data.SqlClient.SqlParameter("@Id", "12") 
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "id", id.ToString()));
+            cate.Delete(conds);
+        }
+
+        /// <summary>
+        /// Update by pId
+        /// </summary>
+        /// <param name="name"></param>
+        public void Remove(int pId)
+        {
+            IList<MYDBCondition> conds = new List<MYDBCondition>();
+            conds.Add(new Equal(MYDBLogic.AND, "pId", pId.ToString()));
+            cate.Delete(conds);
+        }
+
+
+
+        public IList<Category> GetAll(List<string> fields, params MYDBCondition[] conds)
+        {
+            return this.GetAll(fields, null, null, null, conds);
+        }
+
+        public IList<Category> GetAll(List<string> fields, int? page, int? pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        {
+            //need update
+            IList<MYDBCondition> condList = new List<MYDBCondition>();
+            if (fields == null) fields = new List<string> { "id", "pId", "Name" };
+
+            if (pageNum != null && page != null)
+            {
+                if (pageOrder == null) pageOrder = new OrderBy("id", "asc");
+                fields.Add(string.Format("row_number() over({0}) as row", pageOrder.ToQueryString()));
+                condList.Add(new Between(MYDBLogic.AND, "row", (page * pageNum).ToString(), "@end"));
+            }
+
+            conds.ToList().ForEach(s =>
+            {
+                condList.Add(s);
             });
 
-            return cate.Select("Id", "pId", "cateName");
+            cate.Where(condList, null);
+
+            return cate.Select(fields.ToArray());
         }
     }
 }

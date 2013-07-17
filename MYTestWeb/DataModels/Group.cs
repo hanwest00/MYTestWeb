@@ -7,13 +7,13 @@ namespace DataModels
         [PrimaryKey]
         [Identity(1, 1)]
         [ValueNotNull]
-        public int Id
+        public int id
         {
             get;
             set;
         }
 
-        public string Name
+        public string name
         {
             get;
             set;

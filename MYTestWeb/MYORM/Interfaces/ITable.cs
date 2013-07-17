@@ -11,5 +11,6 @@ namespace MYORM.Interfaces
         void Where(IList<MYDBCondition> conds, System.Data.Common.DbParameter[] dbParams);
         void Join(params MYDBQJoin[] joinTables);
         IList<T> Select(params string[] fields);
+        object SelectFeild(string fieldName, IList<MYDBCondition> conds);
     }
 }
