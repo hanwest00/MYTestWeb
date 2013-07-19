@@ -2,7 +2,7 @@
 
 namespace DataModels
 {
-    public class ShortTextInfo : MYORM.MYItemBase
+    public class ShortTextInfo : MYORM.MYItemBase, IModels
     {
         [PrimaryKey]
         [Identity(1, 1)]

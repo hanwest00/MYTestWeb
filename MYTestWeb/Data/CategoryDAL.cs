@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DataModels;
-using MYORM;
 using MYORM.Interfaces;
 using MYORM.Conditions;
 
@@ -96,23 +95,15 @@ namespace Data
 
 
 
-        public IList<Category> GetAll(List<string> fields, params MYDBCondition[] conds)
+        public IList<Category> GetAll(string[] fields, params MYDBCondition[] conds)
         {
-            return this.GetAll(fields, null, null, null, conds);
+            cate.Where(conds, null);
+            return cate.Select(fields);
         }
 
-        public IList<Category> GetAll(List<string> fields, int? page, int? pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        public IList<Category> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
         {
-            //need update
             IList<MYDBCondition> condList = new List<MYDBCondition>();
-            if (fields == null) fields = new List<string> { "id", "pId", "Name" };
-
-            if (pageNum != null && page != null)
-            {
-                if (pageOrder == null) pageOrder = new OrderBy("id", "asc");
-                fields.Add(string.Format("row_number() over({0}) as row", pageOrder.ToQueryString()));
-                condList.Add(new Between(MYDBLogic.AND, "row", (page * pageNum).ToString(), "@end"));
-            }
 
             conds.ToList().ForEach(s =>
             {
@@ -121,7 +112,7 @@ namespace Data
 
             cate.Where(condList, null);
 
-            return cate.Select(fields.ToArray());
+            return cate.Select(fields);
         }
     }
 }

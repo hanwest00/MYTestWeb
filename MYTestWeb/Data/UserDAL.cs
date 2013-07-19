@@ -74,21 +74,13 @@ namespace Data
 
         public IList<User> GetAll(string[] fields,params MYDBCondition[] conds)
         {
-            return this.GetAll(fields,null, null, null, conds);
+            user.Where(conds,null);
+            return user.Select(fields);
         }
 
-        public IList<User> GetAll(string[] fields,int? page, int? pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        public IList<User> GetAll(string[] fields,int page, int pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
         {
-            //need update
             IList<MYDBCondition> condList = new List<MYDBCondition>();
-            if (pageNum == null || page == null)
-                fields = new string[] { "id", "groupId", "name" };
-            else
-            {
-                if (pageOrder == null) pageOrder = new OrderBy("id", "asc");
-                fields = new string[] { string.Format("row_number() over({0}) as row", pageOrder.ToQueryString()), "id", "groupId", "name" };
-                condList.Add(new Between(MYDBLogic.AND, "row", "@start", "@end"));
-            }
 
             conds.ToList().ForEach(s =>
             {

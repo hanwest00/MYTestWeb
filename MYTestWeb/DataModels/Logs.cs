@@ -2,7 +2,7 @@
 
 namespace DataModels
 {
-    public class Logs : MYORM.MYItemBase
+    public class Logs : MYORM.MYItemBase, IModels
     {
         [PrimaryKey]
         [Identity(1,1)]

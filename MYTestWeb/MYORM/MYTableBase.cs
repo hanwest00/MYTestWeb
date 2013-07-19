@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.Common;
+using MYORM.Conditions;
 using MYORM.Attributes;
 
 namespace MYORM
@@ -48,6 +49,7 @@ namespace MYORM
         public abstract void Join(params MYDBQJoin[] joinTables);
         //public abstract void Union(params MYDBQUnion[] Tables);
         public abstract IList<T> Select(params string [] fields);
+        public abstract IList<T> Select(int page, int pageNum, OrderBy pageOrder, params string[] fields);
         public abstract object SelectFeild(string fieldName, IList<MYDBCondition> conds);
     }
 }

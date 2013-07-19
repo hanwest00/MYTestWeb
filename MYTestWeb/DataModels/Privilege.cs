@@ -2,7 +2,7 @@
 
 namespace DataModels
 {
-    public class Privilege : MYORM.MYItemBase
+    public class Privilege : MYORM.MYItemBase, IModels
     {
         public int uId
         {

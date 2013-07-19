@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MYORM.Attributes;
+using MYORM.Conditions;
 using System.Data.SqlClient;
 using System.Data.Common;
 using System.Runtime.InteropServices;
@@ -222,11 +223,19 @@ namespace MYORM.SqlServer
         /// <returns>结果集合</returns>
         public override IList<T> Select(params string[] fields)
         {
+           return this.Select(0, 0, null, fields);
+        }
+
+        public override IList<T> Select(int page, int pageNum, OrderBy pageOrder, params string[] fields)
+        {
             StringBuilder sb = new StringBuilder("select ");
             bool first = true;
-
+            bool isPage = false;
             try
             {
+                if (page > 0 && pageOrder != null)
+                    isPage = true;
+
                 if (fields != null && fields.Length > 0)
                     fields.ToList().ForEach(s =>
                     {
@@ -238,9 +247,14 @@ namespace MYORM.SqlServer
                 else
                     sb.Append("*");
 
-                sb.Append(" from [");
-                sb.Append(TableName);
-                sb.Append("] ");
+                if (isPage)
+                    sb.Append(string.Format("from (select *,row_number() over({0}) as row from [{1}]) as t", pageOrder.ToQueryString(), TableName));
+                else
+                {
+                    sb.Append(" from [");
+                    sb.Append(TableName);
+                    sb.Append("] ");
+                }
 
                 if (joinQuery.Length > 0)
                 {
@@ -248,9 +262,12 @@ namespace MYORM.SqlServer
                     joinQuery.Clear();
                 }
 
+                sb.Append(" where 1 = 1 ");
+
+                if (isPage) sb.Append(string.Format("and row between {0} and {1} ", (page - 1) * pageNum + 1, page * pageNum));
+
                 if (whereQuery.Length > 0)
                 {
-                    sb.Append(" where 1 = 1 ");
                     sb.Append(whereQuery.ToString());
                     whereQuery.Clear();
                 }
@@ -263,6 +280,12 @@ namespace MYORM.SqlServer
             }
         }
 
+        /// <summary>
+        /// 查询单个字段的值
+        /// </summary>
+        /// <param name="fieldName">字段名</param>
+        /// <param name="conds">条件</param>
+        /// <returns></returns>
         public override object SelectFeild(string fieldName, IList<MYDBCondition> conds)
         {
             if (string.IsNullOrEmpty(fieldName)) return null;

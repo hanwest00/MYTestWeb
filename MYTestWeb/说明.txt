@@ -71,7 +71,10 @@ ORM已实现，下一步许实现一个cms来测试ORM的功能和性能
 
 关于cms：
 1,预定义一批常用的调用控件
-/*2,可以在widget中自定义控件,自定义控件使用简单的模版语言 例如:<xx:LIST name="getXX" models="item,cate,user,order" relation="item in cate " getFieds="name=item.name,uname=user.name">.....
+
+
+/*2,可以在widget中自定义控件,自定义控件使用简单的模版语言 例如:<xx:LIST name="getXX" models="item,cate,user,order"
+  relation="item in cate " getFieds="name=item.name,uname=user.name">.....
   定义好后,可在模版中直接使用,如:
   <ul>
   [Widget:getXX]
@@ -81,5 +84,18 @@ ORM已实现，下一步许实现一个cms来测试ORM的功能和性能
 
 
 
- 在data层中所有需要sql语句的地方都应该在ORM中有封装的方法来调用，不然就会使IOC 的多数据库支持无意义,所以需要在ORM中封装更多的方法来满足不同的查询需要（需想出一个好的解决方法）
-  
+3,内容模型为：category 包含多个 model , 一个model 对应一种内容类型（文字、图片、文件、等）. 
+  后台管理流程: 首先新建分类(category) 然后添加model。
+
+
+
+/***************************************************************************************************************/
+ 在data层中所有需要sql语句的地方都应该在ORM中有封装的方法来调用，不然就会使IOC 的多数据库支持无意义,
+ 所以需要在ORM中封装更多的方法来满足不同的查询需要（需想出一个好的解决方法）
+
+ 已解决，方法为：
+   1，把orm的对外接口放入新的类库MYORM.Interfaces中，条件类型放入新的类库MYORM.Conditions中,
+   之前在类库MYORM中的Interfaces和Conditions命名空间移除，
+   在IOC orm时只需引入MYORM.Interfaces和MYORM.Conditions而不需要引入核心的MYORM类库，这样上层对MYORM的依赖可以取消，
+   达到上层和底层之间依赖于接口的目的,从而解耦。
+ /***************************************************************************************************************/ 

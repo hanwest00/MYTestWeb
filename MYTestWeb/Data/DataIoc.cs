@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MYORM;
 using MYORM.Interfaces;
 using MYIoc;
 
@@ -15,7 +14,7 @@ namespace Data
     /// 即可配置系统使用不同的数据库
     /// </summary>
     /// <typeparam name="T">继承自MYORM.MYItemBase的类型</typeparam>
-    public class DataIoc<T> where T : MYORM.MYItemBase
+    public class DataIoc<T> where T : DataModels.IModels
     {
         private static IocContains contians = new IocContains();
 
