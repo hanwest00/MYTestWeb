@@ -28,7 +28,7 @@ namespace MYORM.Conditions
             On.ToList().ForEach((s) => {
                sb.Append(s.ToQueryString());
             });
-            return string.Format("{0} join {1} on {2}", Type.ToString(), Table, sb.ToString());
+            return string.Format("{0} join {1} on 1 = 1 and {2}", Type.ToString(), Table, sb.ToString());
         }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="FileInfo.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="ImageInfo.cs" />
+    <Compile Include="IModels.cs" />
     <Compile Include="Logs.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Privilege.cs" />
@@ -49,6 +50,11 @@
     <Compile Include="ShortTextInfo.cs" />
     <Compile Include="TextInfo.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="CategoryInfo.cs" />
+    <Compile Include="CategoryModel.cs" />
+    <Compile Include="Fliter.cs" />
+    <Compile Include="CategoryInfoFliter.cs" />
+    <Compile Include="CategoryFliter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MYORM\MYORM.csproj">

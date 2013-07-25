@@ -134,6 +134,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.en-US.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdminDemoController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ManagerController.cs" />
@@ -146,6 +147,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\PagesService.cs" />
+    <Compile Include="Models\WebModels\Content.cs" />
     <Compile Include="Models\WebModels\Template.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -176,17 +178,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
-      <Project>{8A1C2185-5042-402A-9BA4-9D04F209DAB0}</Project>
-      <Name>Business</Name>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{A853B16E-B5CC-41C3-BF1D-990655D457E1}</Project>
+      <Name>DataModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{635D2502-EFE6-4DCB-B09B-152E9B711EA0}</Project>
-      <Name>Data</Name>
+    <ProjectReference Include="..\IBusiness\IBusiness.csproj">
+      <Project>{C9CB9EBF-C04C-4812-9FD6-25F731A74BA3}</Project>
+      <Name>IBusiness</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MYORM\MYORM.csproj">
-      <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
-      <Name>MYORM</Name>
+    <ProjectReference Include="..\IocFactory\BusinessIocFactory.csproj">
+      <Project>{C7BFA214-EDE2-4768-910C-00245CEAB24F}</Project>
+      <Name>BusinessIocFactory</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{981757BE-8D06-49FB-A5D1-6056D70BA9A6}</Project>
@@ -258,6 +260,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\DataIoc.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configs\BIZIoc.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminDemo\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminDemo\ContentList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

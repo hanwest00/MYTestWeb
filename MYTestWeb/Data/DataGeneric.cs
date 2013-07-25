@@ -26,11 +26,8 @@ namespace Data
         /// Update by field value
         /// </summary>
         /// <param name="name"></param>
-        public void Update<VT>(T item, string fieldName, VT fieldValue)
+        public void Update(T item, IList<MYDBCondition> conds)
         {
-            IList<MYDBCondition> conds = new List<MYDBCondition>();
-            string val = typeof(VT) == typeof(string) || typeof(VT) == typeof(DateTime) ? string.Format("'{0}'", fieldValue.ToString()) : fieldValue.ToString();
-            conds.Add(new Equal(MYDBLogic.AND, fieldName, val));
             orm.Update(item, conds);
         }
 
@@ -44,11 +41,8 @@ namespace Data
         /// Update by field value
         /// </summary>
         /// <param name="name"></param>
-        public void Remove<VT>(string fieldName, VT fieldValue)
+        public void Remove(IList<MYDBCondition> conds)
         {
-            IList<MYDBCondition> conds = new List<MYDBCondition>();
-            string val = typeof(VT) == typeof(string) || typeof(VT) == typeof(DateTime) ? string.Format("'{0}'", fieldValue.ToString()) : fieldValue.ToString();
-            conds.Add(new Equal(MYDBLogic.AND, fieldName, val));
             orm.Delete(conds);
         }
 
@@ -58,7 +52,7 @@ namespace Data
             return orm.Select(fields);
         }
 
-        public IList<T> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder, params MYDBCondition[] conds)
+        public IList<T> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder, MYDBQJoin[] joins, params MYDBCondition[] conds)
         {
             IList<MYDBCondition> condList = new List<MYDBCondition>();
 
@@ -67,6 +61,7 @@ namespace Data
                 condList.Add(s);
             });
 
+            orm.Join(joins);
             orm.Where(condList, null);
 
             return orm.Select(fields);

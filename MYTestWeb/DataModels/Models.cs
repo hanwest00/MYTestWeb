@@ -7,7 +7,7 @@ namespace DataModels
         [PrimaryKey]
         [Identity(1, 1)]
         [ValueNotNull]
-        public int mId
+        public int id
         {
             get;
             set;
@@ -39,6 +39,11 @@ namespace DataModels
         {
             get;
             set;
+        }
+
+        public int order
+        {
+            get; set;
         }
     }
 }

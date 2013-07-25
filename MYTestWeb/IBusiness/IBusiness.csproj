@@ -40,8 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ICategoryBIZ.cs" />
+    <Compile Include="IDateInfoBIZ.cs" />
+    <Compile Include="IFileInfoBIZ.cs" />
+    <Compile Include="IGroupBIZ.cs" />
+    <Compile Include="IImageInfoBIZ.cs" />
+    <Compile Include="ILogsBIZ.cs" />
+    <Compile Include="IModelsBIZ.cs" />
+    <Compile Include="IPrivilegeBIZ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IShortTextInfoBIZ.cs" />
+    <Compile Include="ITextInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{A853B16E-B5CC-41C3-BF1D-990655D457E1}</Project>
+      <Name>DataModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

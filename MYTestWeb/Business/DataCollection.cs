@@ -9,8 +9,8 @@ namespace Business
 {
     public static class DataCollection
     {
-        private static DataGeneric<Category> categoryInstance;
-        public static DataGeneric<Category> CategoryInstance
+        private static IDataGeneric<Category> categoryInstance;
+        public static IDataGeneric<Category> CategoryInstance
         {
             get
             {
@@ -22,8 +22,60 @@ namespace Business
             }
         }
 
-        private static DataGeneric<User> userInstance;
-        public static DataGeneric<User> UserInstance
+        private static IDataGeneric<CategoryFliter> categoryFliterInstance;
+        public static IDataGeneric<CategoryFliter> CategoryFliterInstance
+        {
+            get
+            {
+                lock (new object())
+                {
+                    if (categoryFliterInstance == null) categoryFliterInstance = new DataGeneric<CategoryFliter>();
+                }
+                return categoryFliterInstance;
+            }
+        }
+
+        private static IDataGeneric<CategoryInfo> categoryInfoInstance;
+        public static IDataGeneric<CategoryInfo> CategoryInfoInstance
+        {
+            get
+            {
+                lock (new object())
+                {
+                    if (categoryInfoInstance == null) categoryInfoInstance = new DataGeneric<CategoryInfo>();
+                }
+                return categoryInfoInstance;
+            }
+        }
+
+        private static IDataGeneric<CategoryInfoFliter> categoryInfoFliterInstance;
+        public static IDataGeneric<CategoryInfoFliter> CategoryInfoFliterInstance
+        {
+            get
+            {
+                lock (new object())
+                {
+                    if (categoryInfoFliterInstance == null) categoryInfoFliterInstance = new DataGeneric<CategoryInfoFliter>();
+                }
+                return categoryInfoFliterInstance;
+            }
+        }
+
+        private static IDataGeneric<CategoryModel> categoryModelInstance;
+        public static IDataGeneric<CategoryModel> CategoryModelInstance
+        {
+            get
+            {
+                lock (new object())
+                {
+                    if (categoryModelInstance == null) categoryModelInstance = new DataGeneric<CategoryModel>();
+                }
+                return categoryModelInstance;
+            }
+        }
+
+        private static IDataGeneric<User> userInstance;
+        public static IDataGeneric<User> UserInstance
         {
             get
             {
@@ -35,8 +87,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<DateInfo> dateInfoInstance;
-        public static DataGeneric<DateInfo> DateInfoInstance
+        private static IDataGeneric<DateInfo> dateInfoInstance;
+        public static IDataGeneric<DateInfo> DateInfoInstance
         {
             get
             {
@@ -48,8 +100,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<FileInfo> fileInfoInstance;
-        public static DataGeneric<FileInfo> FileInfoInstance
+        private static IDataGeneric<FileInfo> fileInfoInstance;
+        public static IDataGeneric<FileInfo> FileInfoInstance
         {
             get
             {
@@ -61,8 +113,21 @@ namespace Business
             }
         }
 
-        private static DataGeneric<Group> groupInstance;
-        public static DataGeneric<Group> GroupInstance
+        private static IDataGeneric<Fliter> fliterInstance;
+        public static IDataGeneric<Fliter> FliterInstance
+        {
+            get
+            {
+                lock (new object())
+                {
+                    if (fliterInstance == null) fliterInstance = new DataGeneric<Fliter>();
+                }
+                return fliterInstance;
+            }
+        }
+
+        private static IDataGeneric<Group> groupInstance;
+        public static IDataGeneric<Group> GroupInstance
         {
             get
             {
@@ -74,8 +139,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<ImageInfo> imageInfoInstance;
-        public static DataGeneric<ImageInfo> ImageInfoInstance
+        private static IDataGeneric<ImageInfo> imageInfoInstance;
+        public static IDataGeneric<ImageInfo> ImageInfoInstance
         {
             get
             {
@@ -87,8 +152,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<Logs> logsInstance;
-        public static DataGeneric<Logs> LogsInstance
+        private static IDataGeneric<Logs> logsInstance;
+        public static IDataGeneric<Logs> LogsInstance
         {
             get
             {
@@ -100,8 +165,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<Models> modelsInstance;
-        public static DataGeneric<Models> ModelsInstance
+        private static IDataGeneric<Models> modelsInstance;
+        public static IDataGeneric<Models> ModelsInstance
         {
             get
             {
@@ -113,8 +178,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<Privilege> privilegeInstance;
-        public static DataGeneric<Privilege> PrivilegeInstance
+        private static IDataGeneric<Privilege> privilegeInstance;
+        public static IDataGeneric<Privilege> PrivilegeInstance
         {
             get
             {
@@ -126,8 +191,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<ShortTextInfo> shortTextInfoInstance;
-        public static DataGeneric<ShortTextInfo> ShortTextInfoInstance
+        private static IDataGeneric<ShortTextInfo> shortTextInfoInstance;
+        public static IDataGeneric<ShortTextInfo> ShortTextInfoInstance
         {
             get
             {
@@ -139,8 +204,8 @@ namespace Business
             }
         }
 
-        private static DataGeneric<TextInfo> textInfoInstance;
-        public static DataGeneric<TextInfo> TextInfoInstance
+        private static IDataGeneric<TextInfo> textInfoInstance;
+        public static IDataGeneric<TextInfo> TextInfoInstance
         {
             get
             {

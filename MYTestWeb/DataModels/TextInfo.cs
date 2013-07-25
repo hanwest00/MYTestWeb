@@ -7,7 +7,14 @@ namespace DataModels
         [PrimaryKey]
         [Identity(1, 1)]
         [ValueNotNull]
-        public int iId
+        public int id
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        public int ciId
         {
             get;
             set;

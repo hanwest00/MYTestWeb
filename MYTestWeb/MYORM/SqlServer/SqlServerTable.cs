@@ -162,7 +162,7 @@ namespace MYORM.SqlServer
                             sb.Append(",");
                         firstProp = false;
                         sb.Append(s.Name);
-                        sb.Append("=@");
+                        sb.Append(" = @");
                         sb.Append(s.Name);
                         sqlParams.Add(new SqlParameter(string.Format("@{0}", s.Name), propValue));
                     }

@@ -40,17 +40,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryBIZ.cs" />
+    <Compile Include="DataCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DateInfoBIZ.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{A853B16E-B5CC-41C3-BF1D-990655D457E1}</Project>
+      <Name>DataModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{635D2502-EFE6-4DCB-B09B-152E9B711EA0}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MYORM\MYORM.csproj">
-      <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
-      <Name>MYORM</Name>
+    <ProjectReference Include="..\IBusiness\IBusiness.csproj">
+      <Project>{C9CB9EBF-C04C-4812-9FD6-25F731A74BA3}</Project>
+      <Name>IBusiness</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MYORM.Conditions\MYORM.Conditions.csproj">
+      <Project>{26A7BBD4-F043-4780-AA00-1505C5E6378F}</Project>
+      <Name>MYORM.Conditions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TextInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ShortTextInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PrivilegeBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelsBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LogsBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GroupBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileInfoBIZ.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

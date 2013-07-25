@@ -8,11 +8,11 @@ namespace Data
     {
         void Insert(T item);
         void Update(T item);
-        void Update<VT>(T item, string fieldName, VT fieldValue);
+        void Update(T item, IList<MYDBCondition> conds);
         void Remove(T item);
-        void Remove<VT>(string fieldName, VT fieldValue);
+        void Remove(IList<MYDBCondition> conds);
         IList<T> GetAll(string[] fields, params MYDBCondition[] conds);
-        IList<T> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder, params MYDBCondition[] conds);
+        IList<T> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder,MYDBQJoin[] joins, params MYDBCondition[] conds);
         object GetFeildValue(string fieldName, params MYDBCondition[] conds);
     }
 }
