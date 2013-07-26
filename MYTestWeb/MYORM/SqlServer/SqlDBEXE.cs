@@ -59,9 +59,9 @@ namespace MYORM.SqlServer
                 MakeCommand(queryString, type, tran, ref conn, sqlParams, out comm);
                 return comm.ExecuteNonQuery();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -94,9 +94,9 @@ namespace MYORM.SqlServer
                 MakeCommand(queryString, type, tran, ref conn, sqlParams, out comm);
                 return comm.ExecuteReader();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -130,9 +130,9 @@ namespace MYORM.SqlServer
                 adp.Fill(ret);
                 return ret;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -166,9 +166,9 @@ namespace MYORM.SqlServer
                 reader = ExeReader(dbConnString, queryString, type, tran, sqlParams);
                 return InfosBinder<T>(reader);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -202,9 +202,9 @@ namespace MYORM.SqlServer
                 MakeCommand(queryString, type, tran, ref conn, sqlParams, out comm);
                 return comm.ExecuteScalar();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             finally
             {
@@ -223,9 +223,9 @@ namespace MYORM.SqlServer
                     conn.ConnectionString = ConnectString;
                 return conn;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

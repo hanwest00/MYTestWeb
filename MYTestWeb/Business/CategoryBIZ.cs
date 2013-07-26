@@ -5,6 +5,7 @@ using System.Text;
 using Data;
 using DataModels;
 using IBusiness;
+using MYORM.Conditions;
 
 namespace Business
 {
@@ -17,22 +18,42 @@ namespace Business
 
         public IList<Category> GetCategoryList(int page, int pageSize, int pId)
         {
-            return DataCollection.CategoryInstance.GetAll(null, page, pageSize, new MYORM.Conditions.OrderBy("id", "asc"), null, pId > 0 ? new MYORM.Conditions.Equal(MYORM.Conditions.MYDBLogic.AND, "pId", pId.ToString()) : null);
+
+            return DataCollection.CategoryInstance.GetAll(null, page, pageSize, new OrderBy("id", "asc"), null, pId > 0 ? new Equal(MYDBLogic.AND, "pId", pId.ToString()) : null, new OrderBy("order", "asc"));
+
         }
 
         public IList<Category> GetPermitCategoryList(int page, int pageSize, int uId)
         {
+
             return this.GetPermitCategoryList(page, pageSize, uId, 0);
+
         }
 
         public IList<Category> GetPermitCategoryList(int page, int pageSize, int uId, int pId)
         {
-            return DataCollection.CategoryInstance.GetAll(null, page, pageSize, new MYORM.Conditions.OrderBy("id", "asc"), new MYORM.Conditions.MYDBQJoin[] { new MYORM.Conditions.MYDBQJoin("Privilege", MYORM.Conditions.MYDBQJoin.JoinType.INNER, new MYORM.Conditions.Equal(MYORM.Conditions.MYDBLogic.AND, "Privilege.cId", "Category.id"), new MYORM.Conditions.Equal(MYORM.Conditions.MYDBLogic.AND, "Privilege.uId", uId.ToString())) }, pId > 0 ? new MYORM.Conditions.Equal(MYORM.Conditions.MYDBLogic.AND, "pId", pId.ToString()) : null);
+            try
+            {
+                return DataCollection.CategoryInstance.GetAll(null, page, pageSize, new OrderBy("id", "asc"), new MYDBQJoin[] { new MYDBQJoin("Privilege", MYDBQJoin.JoinType.INNER, new Equal(MYDBLogic.AND, "Privilege.cId", "Category.id"), new Equal(MYDBLogic.AND, "Privilege.uId", uId.ToString())) }, pId > 0 ? new Equal(MYDBLogic.AND, "pId", pId.ToString()) : null, new OrderBy("order", "asc"));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void AddCategory(Category cate)
         {
-            DataCollection.CategoryInstance.Insert(cate);
+            try
+            {
+                object maxOrder = DataCollection.CategoryInstance.GetFeildValue("max(order)", new Equal(MYDBLogic.AND, "pId", cate.pId.ToString()));
+                cate.order = maxOrder != null ? Convert.ToInt32(maxOrder) + 1 : 1;
+                DataCollection.CategoryInstance.Insert(cate);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void ModifyCategory(Category cate)
@@ -43,6 +64,22 @@ namespace Business
         public void RemoveCategory(Category cate)
         {
             DataCollection.CategoryInstance.Remove(cate);
+        }
+
+        public void ChangeOrder(Category cate1, Category cate2)
+        {
+            try
+            {
+                int tmp = cate1.order;
+                cate1.order = cate2.order;
+                cate2.order = tmp;
+                DataCollection.CategoryInstance.Update(cate1);
+                DataCollection.CategoryInstance.Update(cate2);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

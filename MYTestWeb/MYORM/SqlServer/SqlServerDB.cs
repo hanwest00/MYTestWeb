@@ -60,9 +60,9 @@ namespace MYORM.SqlServer
             {
                 return dbExe.ExeScalar(dbMasterConnectString, string.Format("select 1 from master.dbo.sysdatabases where name='{0}'", DatabaseName), null) != null;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -75,9 +75,9 @@ namespace MYORM.SqlServer
             {
                 return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("CREATE DATABASE {0} ON PRIMARY (NAME = MyDatabase_Data, FILENAME = '{1}{0}.mdf', SIZE = 3MB) LOG ON (NAME = MyDatabase_Log, FILENAME = '{1}{0}.ldf', SIZE = 1MB)", DatabaseName, DbFileDir), null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -87,9 +87,9 @@ namespace MYORM.SqlServer
             {
                 return dbExe.ExeScalar(null, string.Format("select 1 from sysobjects where name='{0}' and type='U'", tableName), null) != null;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -182,9 +182,9 @@ namespace MYORM.SqlServer
 
                 return dbExe.ExeNonQuery(null, sb.ToString(), null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -197,9 +197,9 @@ namespace MYORM.SqlServer
             {
                 return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("drop table {0}", tableName), null);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

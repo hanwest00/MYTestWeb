@@ -1,4 +1,5 @@
-﻿using MYORM.Attributes;
+﻿using System;
+using MYORM.Attributes;
 
 namespace DataModels
 {
@@ -17,6 +18,18 @@ namespace DataModels
         public int flId
         {
             get; set;
+        }
+
+        public int order
+        {
+            get;
+            set;
+        }
+
+        public DateTime createDate
+        {
+            get;
+            set;
         }
     }
 }

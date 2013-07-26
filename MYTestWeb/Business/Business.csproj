@@ -41,9 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryBIZ.cs" />
+    <Compile Include="CategoryFliterBIZ.cs" />
+    <Compile Include="CategoryInfoBIZ.cs" />
+    <Compile Include="CategoryInfoFliterBIZ.cs" />
+    <Compile Include="CategoryModelBIZ.cs" />
     <Compile Include="DataCollection.cs" />
+    <Compile Include="FliterBIZ.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DateInfoBIZ.cs" />
+    <Compile Include="UserBIZ.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataModels\DataModels.csproj">

@@ -1,4 +1,5 @@
-﻿using MYORM.Attributes;
+﻿using System;
+using MYORM.Attributes;
 
 namespace DataModels
 {
@@ -15,6 +16,18 @@ namespace DataModels
 
         [DBValueType("nvarchar(127)")]
         public string fName
+        {
+            get;
+            set;
+        }
+
+        public int order
+        {
+            get;
+            set;
+        }
+
+        public DateTime createDate
         {
             get;
             set;

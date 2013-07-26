@@ -20,8 +20,15 @@ namespace Data
 
         public static ITable<T> GetData()
         {
-            contians.RegisterTypeFromConfig(string.Format("{0}DataIoc.config", Util.WebPathManager.ConfigsUrl));
-            return contians.ResolveGeneric<ITable<T>>(Util.WebConfigManager.DatebaseType, typeof(T));
+            try
+            {
+                contians.RegisterTypeFromConfig(string.Format("{0}DataIoc.config", Util.WebPathManager.ConfigsUrl));
+                return contians.ResolveGeneric<ITable<T>>(Util.WebConfigManager.DatebaseType, typeof(T));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

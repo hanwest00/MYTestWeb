@@ -14,5 +14,6 @@ namespace Data
         IList<T> GetAll(string[] fields, params MYDBCondition[] conds);
         IList<T> GetAll(string[] fields, int page, int pageNum, OrderBy pageOrder,MYDBQJoin[] joins, params MYDBCondition[] conds);
         object GetFeildValue(string fieldName, params MYDBCondition[] conds);
+        object GetFeildValue(string fieldName, MYDBQJoin[] joins, params MYDBCondition[] conds);
     }
 }

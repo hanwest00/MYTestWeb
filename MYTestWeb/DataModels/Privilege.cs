@@ -4,13 +4,45 @@ namespace DataModels
 {
     public class Privilege : MYORM.MYItemBase, IModels
     {
-        public int uId
+        public int cId
         {
             get;
             set;
         }
 
-        public int cId
+        public int gId
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        [Default(0)]
+        public int select
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        [Default(0)]
+        public int insert
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        [Default(0)]
+        public int delete
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        [Default(0)]
+        public int update
         {
             get;
             set;

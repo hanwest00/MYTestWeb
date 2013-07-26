@@ -1,4 +1,5 @@
-﻿using MYORM.Attributes;
+﻿using System;
+using MYORM.Attributes;
 
 namespace DataModels
 {
@@ -22,6 +23,31 @@ namespace DataModels
         }
 
         public string cateName
+        {
+            get;
+            set;
+        }
+
+        public string image
+        {
+            get;
+            set;
+        }
+
+        [DBValueType("text")]
+        public string description
+        {
+            get;
+            set;
+        }
+
+        public int order
+        {
+            get;
+            set;
+        }
+
+        public DateTime createDate
         {
             get;
             set;

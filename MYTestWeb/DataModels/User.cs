@@ -1,4 +1,5 @@
-﻿using MYORM.Attributes;
+﻿using System;
+using MYORM.Attributes;
 
 namespace DataModels
 {
@@ -14,13 +15,76 @@ namespace DataModels
         }
 
         [ValueNotNull]
-        public int groupId
+        public int gId
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        public string loginName
+        {
+            get;
+            set;
+        }
+
+        [ValueNotNull]
+        public string password
         {
             get;
             set;
         }
 
         public string name
+        {
+            get;
+            set;
+        }
+
+        public string avatar
+        {
+            get;
+            set;
+        }
+
+        public string email
+        {
+            get;
+            set;
+        }
+
+        public string address
+        {
+            get;
+            set;
+        }
+
+        public string tel
+        {
+            get;
+            set;
+        }
+
+        public string fox
+        {
+            get;
+            set;
+        }
+
+        [DBValueType("text")]
+        public string description
+        { 
+            get; 
+            set;
+        }
+
+        public int order
+        {
+            get;
+            set;
+        }
+
+        public DateTime createDate
         {
             get;
             set;

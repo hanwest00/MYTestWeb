@@ -12,5 +12,6 @@ namespace IBusiness
         void AddCategory(Category cate);
         void ModifyCategory(Category cate);
         void RemoveCategory(Category cate);
+        void ChangeOrder(Category cate1, Category cate2);
     }
 }

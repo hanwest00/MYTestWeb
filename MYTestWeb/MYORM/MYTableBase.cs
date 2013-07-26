@@ -12,8 +12,11 @@ namespace MYORM
     public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYItemBase
     {
         private static string tableName = string.Empty;
+        [ThreadStatic]
         protected static StringBuilder whereQuery = new StringBuilder();
+        [ThreadStatic]
         protected static StringBuilder joinQuery = new StringBuilder();
+        [ThreadStatic]
         protected static DbParameter[] selectParams = null;
 
         public static Type TableType

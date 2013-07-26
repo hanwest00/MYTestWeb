@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICategoryBIZ.cs" />
+    <Compile Include="ICategoryFliterBIZ.cs" />
+    <Compile Include="ICategoryInfoBIZ.cs" />
+    <Compile Include="ICategoryInfoFliterBIZ.cs" />
+    <Compile Include="ICategoryModelBIZ.cs" />
     <Compile Include="IDateInfoBIZ.cs" />
     <Compile Include="IFileInfoBIZ.cs" />
     <Compile Include="IGroupBIZ.cs" />

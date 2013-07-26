@@ -35,9 +35,9 @@ namespace MYORM.SqlServer
             {
                 sqlDB.CreateTable(typeof(T), TableName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -77,9 +77,9 @@ namespace MYORM.SqlServer
                 sb.Append(valueSb.ToString());
                 sqlDB.dbExe.ExeNonQuery(null, sb.ToString(), sqlParams);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -112,9 +112,9 @@ namespace MYORM.SqlServer
 
                 sqlDB.dbExe.ExeNonQuery(null, sb.ToString(), sqlParams);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         public override void Delete(IList<MYDBCondition> conds)
@@ -135,9 +135,9 @@ namespace MYORM.SqlServer
                     return;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         public override void Update(T item, IList<MYDBCondition> conds)
@@ -178,9 +178,9 @@ namespace MYORM.SqlServer
                 }
                 sqlDB.dbExe.ExeNonQuery(null, sb.ToString(), sqlParams);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         /// <summary>
@@ -274,7 +274,7 @@ namespace MYORM.SqlServer
 
                 return sqlDB.dbExe.ExeReaderToList<T>(null, sb.ToString(), selectParams);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -291,9 +291,17 @@ namespace MYORM.SqlServer
             if (string.IsNullOrEmpty(fieldName)) return null;
             StringBuilder sb = new StringBuilder("select ");
             sb.Append(fieldName);
+
+            if (joinQuery.Length > 0)
+            {
+                sb.Append(joinQuery.ToString());
+                joinQuery.Clear();
+            }
+
+            sb.Append(" where 1 = 1 ");
+
             if (conds != null && conds.Count > 0)
             {
-                sb.Append(" where 1 = 1 ");
                 conds.ToList().ForEach(s =>
                 {
                     sb.Append(s.ToQueryString());
@@ -301,5 +309,6 @@ namespace MYORM.SqlServer
             }
             return sqlDB.dbExe.ExeScalar(null, sb.ToString(), null);
         }
+
     }
 }

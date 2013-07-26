@@ -27,7 +27,7 @@ namespace DataModels
             set;
         }
 
-        public System.DateTime LogDate
+        public System.DateTime logDate
         {
             get;
             set;
