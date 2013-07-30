@@ -90,10 +90,11 @@ namespace MYIoc
         private register XElementToRegister(XElement xElem)
         {
             if (xElem == null) return null;
-            var Name = xElem.Attribute(ATTRI_NAME).Value;
+            XAttribute name = xElem.Attribute(ATTRI_NAME);
+            var Name = name != null ? name.Value : "";
             var Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value);
             var MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value);
-            register ret = new register { Name = xElem.Attribute(ATTRI_NAME).Value, Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value), MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value) };
+            register ret = new register { Name = Name, Type = this.GetAssType(xElem.Attribute(ATTRI_TYPE).Value), MapTo = this.GetAssType(xElem.Attribute(ATTRI_MAPTO).Value) };
             XElement c = xElem.Element(XName.Get(CFG_CSTRNODE));
 
             if (c != null) ret.constructor = this.AddParamsToItem(c, new constructor()) as constructor;

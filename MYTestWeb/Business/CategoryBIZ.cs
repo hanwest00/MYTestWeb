@@ -81,5 +81,21 @@ namespace Business
                 throw;
             }
         }
+
+        public int ChildrenCount(int id)
+        {
+            try
+            {
+                int ret;
+                if (int.TryParse(DataCollection.CategoryInstance.GetFeildValue("count(1)", new Equal(MYDBLogic.AND, "pId", id.ToString())).ToString(), out ret))
+                    return ret;
+                else
+                    return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ using MYORM.Attributes;
 
 namespace DataModels
 {
-    public class CategoryModel : MYORM.MYItemBase, IModels
+    public class CategoryModel : MYORM.Interfaces.MYItemBase, IModels
     {
         [ValueNotNull]
         [Default(0)]

@@ -10,16 +10,5 @@ namespace UI.Controllers
     {
         //
         // GET: /Pages/
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Index()
-        {
-            return View();
-        }
     }
 }

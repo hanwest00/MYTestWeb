@@ -13,5 +13,6 @@ namespace IBusiness
         void ModifyCategory(Category cate);
         void RemoveCategory(Category cate);
         void ChangeOrder(Category cate1, Category cate2);
+        int ChildrenCount(int id);
     }
 }

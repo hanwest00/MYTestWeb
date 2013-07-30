@@ -9,15 +9,15 @@ namespace UI.Controllers
         //初始化语言环境配置
         static BaseController()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(WebUtil.WebConfigManager.DefaultLanguage);
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(WebUtil.WebConfigManager.DefaultLanguage);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(Util.WebConfigManager.DefaultLanguage);
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Util.WebConfigManager.DefaultLanguage);
         }
 
         protected string Language
         {
             get
             {
-                if (Session["language"] == null) Session["language"] = WebUtil.WebConfigManager.DefaultLanguage;
+                if (Session["language"] == null) Session["language"] = Util.WebConfigManager.DefaultLanguage;
                 return Session["language"].ToString();
             }
             set

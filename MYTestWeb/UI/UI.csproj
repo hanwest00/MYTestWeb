@@ -155,6 +155,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Data\Scripts\jquery-1.5.1.min.js" />
     <Content Include="Global.asax" />
     <Content Include="HTMLPage1.htm" />
     <Content Include="Templates\Default\config.xml" />
@@ -178,6 +179,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{8A1C2185-5042-402A-9BA4-9D04F209DAB0}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataModels\DataModels.csproj">
       <Project>{A853B16E-B5CC-41C3-BF1D-990655D457E1}</Project>
       <Name>DataModels</Name>
@@ -190,6 +195,10 @@
       <Project>{C7BFA214-EDE2-4768-910C-00245CEAB24F}</Project>
       <Name>BusinessIocFactory</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
+      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
+      <Name>MYORM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{981757BE-8D06-49FB-A5D1-6056D70BA9A6}</Project>
       <Name>Util</Name>
@@ -199,7 +208,7 @@
     <Content Include="Views\Manager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configs\MYLog.config">
+    <Content Include="MYLog.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
@@ -271,6 +280,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdminDemo\ContentList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminDemo\CategoryList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdminDemo\_CategoryList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

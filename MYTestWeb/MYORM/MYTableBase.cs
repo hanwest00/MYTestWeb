@@ -9,7 +9,7 @@ using MYORM.Attributes;
 
 namespace MYORM
 {
-    public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYItemBase
+    public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYORM.Interfaces.MYItemBase
     {
         private static string tableName = string.Empty;
         [ThreadStatic]

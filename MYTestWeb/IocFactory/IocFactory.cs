@@ -4,11 +4,21 @@ using System.Linq;
 using System.Text;
 using MYIoc;
 
-namespace IocFactory
+namespace BusinessIocFactory
 {
     public class IocFactory
     {
         private static IocContains contians = new IocContains();
+        private static IocFactory instance = null;
+
+        public static IocFactory Instance
+        {
+            get
+            {
+                if (instance == null) instance = new IocFactory();
+                return instance;
+            }  
+        }
 
         public IocFactory()
         {

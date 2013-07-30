@@ -68,6 +68,10 @@
       <Project>{26A7BBD4-F043-4780-AA00-1505C5E6378F}</Project>
       <Name>MYORM.Conditions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
+      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
+      <Name>MYORM.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TextInfoBIZ.cs" />

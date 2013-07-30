@@ -33,9 +33,9 @@ namespace Util.Log
             {
                 log.Insert(new DataModels.Logs
                 {
-                    Content = message,
-                    LogDate = DateTime.Now,
-                    LogType = type
+                    content = message,
+                    logDate = DateTime.Now,
+                    logType = type
                 });
                 return true;
             }

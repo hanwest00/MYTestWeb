@@ -3,7 +3,7 @@ using MYORM.Attributes;
 
 namespace DataModels
 {
-    public class CategoryFliter : MYORM.MYItemBase, IModels
+    public class CategoryFliter : MYORM.Interfaces.MYItemBase, IModels
     {
         [ValueNotNull]
         [Default(0)]

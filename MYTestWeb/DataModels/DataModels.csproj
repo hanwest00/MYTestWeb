@@ -57,6 +57,10 @@
     <Compile Include="CategoryFliter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
+      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
+      <Name>MYORM.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MYORM\MYORM.csproj">
       <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
       <Name>MYORM</Name>

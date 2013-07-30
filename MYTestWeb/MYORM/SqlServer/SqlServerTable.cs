@@ -11,7 +11,7 @@ using System.CodeDom;
 
 namespace MYORM.SqlServer
 {
-    public class SqlServerTable<T> : MYTableBase<T>, Interfaces.ITable<T> where T : MYItemBase
+    public class SqlServerTable<T> : MYTableBase<T>, Interfaces.ITable<T> where T : MYORM.Interfaces.MYItemBase
     {
         private SqlServerDB sqlDB = SqlServerDB.GetInstance();
 

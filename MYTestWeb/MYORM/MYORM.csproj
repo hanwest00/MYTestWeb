@@ -57,7 +57,7 @@
     <Compile Include="MYDBBase.cs" />
     <Compile Include="MYDBEXE.cs" />
     <Compile Include="MYDBType.cs" />
-    <Compile Include="MYItemBase.cs" />
+    <None Include="MYItemBase.cs---" />
     <Compile Include="MYTableBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer\SqlDBEXE.cs" />
