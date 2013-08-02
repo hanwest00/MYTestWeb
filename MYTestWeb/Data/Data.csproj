@@ -54,13 +54,9 @@
       <Project>{0A4C84ED-E1B9-4912-96A2-EE48B14C2E41}</Project>
       <Name>MYIoc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MYORM.Conditions\MYORM.Conditions.csproj">
-      <Project>{26A7BBD4-F043-4780-AA00-1505C5E6378F}</Project>
-      <Name>MYORM.Conditions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
-      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
-      <Name>MYORM.Interfaces</Name>
+    <ProjectReference Include="..\MYORM\MYORM.csproj">
+      <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
+      <Name>MYORM</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{981757BE-8D06-49FB-A5D1-6056D70BA9A6}</Project>

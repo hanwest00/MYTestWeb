@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MYORM.Conditions;
 
 namespace MYORM.Interfaces
 {

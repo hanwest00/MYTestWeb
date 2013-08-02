@@ -49,15 +49,37 @@
     <Compile Include="Attributes\Table.cs" />
     <Compile Include="Attributes\Unique.cs" />
     <Compile Include="Attributes\ValueNotNull.cs" />
+    <Compile Include="Conditions\Between.cs" />
+    <Compile Include="Conditions\Equal.cs" />
+    <Compile Include="Conditions\Exists.cs" />
+    <Compile Include="Conditions\GroupBy.cs" />
+    <Compile Include="Conditions\In.cs" />
+    <Compile Include="Conditions\Less.cs" />
+    <Compile Include="Conditions\LessEqual.cs" />
+    <Compile Include="Conditions\Like.cs" />
+    <Compile Include="Conditions\More.cs" />
+    <Compile Include="Conditions\MoreEqual.cs" />
+    <Compile Include="Conditions\MYDBCondition.cs" />
+    <Compile Include="Conditions\MYDBConditionType.cs" />
+    <Compile Include="Conditions\MYDBFunction.cs" />
+    <Compile Include="Conditions\MYDBLogic.cs" />
+    <Compile Include="Conditions\MYDBQJoin.cs" />
+    <Compile Include="Conditions\MYDBQUnion.cs" />
+    <Compile Include="Conditions\NotEqual.cs" />
+    <Compile Include="Conditions\NotExists.cs" />
+    <Compile Include="Conditions\NotIn.cs" />
+    <Compile Include="Conditions\OrderBy.cs" />
     <Compile Include="Exceptions\ConnectionNullExpection.cs" />
     <Compile Include="Exceptions\CreateDBException.cs" />
     <Compile Include="Exceptions\TableContianException.cs" />
     <Compile Include="Exceptions\TableNotContianException.cs" />
     <Compile Include="ExFunc.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
+    <Compile Include="Interfaces\IToQueryable.cs" />
     <Compile Include="MYDBBase.cs" />
     <Compile Include="MYDBEXE.cs" />
     <Compile Include="MYDBType.cs" />
-    <None Include="MYItemBase.cs---" />
+    <Compile Include="MYItemBase.cs" />
     <Compile Include="MYTableBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServer\SqlDBEXE.cs" />
@@ -69,16 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlServer\SqlFunctions\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MYORM.Conditions\MYORM.Conditions.csproj">
-      <Project>{26A7BBD4-F043-4780-AA00-1505C5E6378F}</Project>
-      <Name>MYORM.Conditions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
-      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
-      <Name>MYORM.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

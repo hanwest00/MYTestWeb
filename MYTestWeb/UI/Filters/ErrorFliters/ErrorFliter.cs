@@ -10,7 +10,7 @@ namespace UI.Filters.ErrorFliters
     {
         public override void OnException(ExceptionContext filterContext)
         {
-            System.Web.HttpContext.Current.Response.Redirect(string.Format("Error/Index/{0}", Util.Log.LogIoc.GetInstance()[0].Error(filterContext.Exception.ToString()) ? "1" : "0"));
+            System.Web.HttpContext.Current.Response.Redirect(string.Format("~/Error/Index/{0}", Util.Log.LogIoc.GetInstance()[0].Error(filterContext.Exception.ToString()) ? "1" : "0"));
         }
     }
 }

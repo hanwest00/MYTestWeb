@@ -15,7 +15,7 @@ namespace MYORM.Conditions
 
         public override string ToQueryString()
         {
-            return string.Format(" {0} {1} ", ConditionName, PropName);
+            return string.Format(" {0} [{1}] ", ConditionName, PropName);
         }
     }
 }

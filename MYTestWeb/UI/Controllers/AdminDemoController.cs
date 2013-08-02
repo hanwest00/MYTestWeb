@@ -14,6 +14,7 @@ namespace UI.Controllers
         // GET: /AdminDemo/
 
         private ICategoryBIZ cateBIZ = IocFactory.Instance.GetBIZ<ICategoryBIZ>();
+        private IModelsBIZ modelsBIZ = IocFactory.Instance.GetBIZ<IModelsBIZ>();
 
         public ActionResult Index()
         {
@@ -26,23 +27,27 @@ namespace UI.Controllers
             return View();
         }
 
-        public PartialViewResult _CategoryList(int pId)
+        public ActionResult _CategoryList(int pId)
         {
             System.Text.StringBuilder sb = new System.Text.StringBuilder("[");
-            cateBIZ.GetCategoryList(0, 0, pId).ToList().ForEach(s => {
-                sb.Append("{");
-                sb.Append("\"name\" : \"");
-                sb.Append(s.cateName);
-                sb.Append("\",");
-                sb.Append("\"id\" : ");
-                sb.Append(s.id);
-                sb.Append(",\"ccount\" : ");
-                sb.Append(cateBIZ.ChildrenCount(s.id));
-                sb.Append("}");
-            });
+            var list = cateBIZ.GetCategoryList(0, 0, pId);
+            if (list != null)
+            {
+                list.ToList().ForEach(s =>
+                {
+                    sb.Append("{");
+                    sb.Append("\"name\" : \"");
+                    sb.Append(s.cateName);
+                    sb.Append("\",");
+                    sb.Append("\"id\" : ");
+                    sb.Append(s.id);
+                    sb.Append(",\"ccount\" : ");
+                    sb.Append(cateBIZ.ChildrenCount(s.id));
+                    sb.Append("}");
+                });
+            }
             sb.Append("]");
-            ViewBag.content = sb.ToString();
-            return PartialView();
+            return Content(sb.ToString());
         }
 
         public ActionResult ViewInfoList(int id)
@@ -51,9 +56,20 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult ViewInfoList(int id)
+        public ActionResult ViewInfoList()
         {
             return View();
+        }
+
+        public ActionResult AddCategory()
+        {
+            HttpFileCollection files = System.Web.HttpContext.Current.Request.Files;
+            return View();
+        }
+
+        public JsonResult ModelList()
+        {
+            return Json(modelsBIZ.GetModels(0, 0));
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MYORM.Conditions
             sb.Append("(");
             Values.ToList().ForEach((s) => { sb.Append(s); if (sb.Length != 1)sb.Append(","); });
             sb.Append(")");
-            return string.Format(" {0} {1} {2} {3} ", (Logic != MYDBLogic.NOTSET ? Logic.ToString() : string.Empty), PropName, ConditionName, sb.ToString());
+            return string.Format(" {0} [{1}] {2} {3} ",  Logic.ToString(), PropName, ConditionName, sb.ToString());
         }
     }
 }

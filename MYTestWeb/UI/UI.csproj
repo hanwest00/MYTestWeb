@@ -146,6 +146,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AsyncResults\UploadProcessAsyncResult.cs" />
+    <Compile Include="Models\Handlers\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Handlers\UploadProcess.ashx.cs">
+      <DependentUpon>UploadProcess.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\PagesService.cs" />
     <Compile Include="Models\WebModels\Content.cs" />
     <Compile Include="Models\WebModels\Template.cs" />
@@ -195,9 +202,9 @@
       <Project>{C7BFA214-EDE2-4768-910C-00245CEAB24F}</Project>
       <Name>BusinessIocFactory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MYORM.Interfaces\MYORM.Interfaces.csproj">
-      <Project>{38B6836E-5DB7-4629-BE4E-9453A6A93828}</Project>
-      <Name>MYORM.Interfaces</Name>
+    <ProjectReference Include="..\MYORM\MYORM.csproj">
+      <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
+      <Name>MYORM</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{981757BE-8D06-49FB-A5D1-6056D70BA9A6}</Project>
@@ -285,7 +292,13 @@
     <Content Include="Views\AdminDemo\CategoryList.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AdminDemo\_CategoryList.cshtml" />
+    <Content Include="Views\AdminDemo\AddCategory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Handlers\UploadProcess.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\Handlers\UploadHandler.ashx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -302,8 +315,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1611</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>1612</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

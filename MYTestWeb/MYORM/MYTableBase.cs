@@ -9,13 +9,13 @@ using MYORM.Attributes;
 
 namespace MYORM
 {
-    public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYORM.Interfaces.MYItemBase
+    public abstract class MYTableBase<T> : Interfaces.ITable<T> where T : MYORM.MYItemBase
     {
         private static string tableName = string.Empty;
         [ThreadStatic]
-        protected static StringBuilder whereQuery = new StringBuilder();
+        protected static StringBuilder whereQuery;
         [ThreadStatic]
-        protected static StringBuilder joinQuery = new StringBuilder();
+        protected static StringBuilder joinQuery;
         [ThreadStatic]
         protected static DbParameter[] selectParams = null;
 

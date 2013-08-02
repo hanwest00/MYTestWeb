@@ -3,7 +3,7 @@ using MYORM.Attributes;
 
 namespace DataModels
 {
-    public class User : MYORM.Interfaces.MYItemBase, IModels
+    public class User : MYORM.MYItemBase, IModels
     {
         [PrimaryKey]
         [Identity(1,1)]

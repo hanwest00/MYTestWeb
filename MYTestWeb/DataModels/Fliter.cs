@@ -3,7 +3,7 @@ using MYORM.Attributes;
 
 namespace DataModels
 {
-    public class Fliter : MYORM.Interfaces.MYItemBase, IModels
+    public class Fliter : MYORM.MYItemBase, IModels
     {
         [PrimaryKey]
         [Identity(1, 1)]

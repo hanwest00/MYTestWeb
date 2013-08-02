@@ -60,9 +60,13 @@ namespace MYIoc
                 toList.Add(reg);
 
                 //添加name对应typeCollection的索引
-                if (!string.IsNullOrEmpty(reg.Name)) this.nameIndex.Add(reg.Name, new int[] { this.typeCollection.Count - 1, toList.Count - 1 });
+                if (!string.IsNullOrEmpty(reg.Name))
+                {
+                    KeyValuePair<string, int[]> v = new KeyValuePair<string, int[]>(reg.Name, new int[] { this.typeCollection.Count - 1, toList.Count - 1 });
+                    if (!this.nameIndex.Contains(v)) this.nameIndex.Add(v);
+                }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //如果出错移除name对应typeCollection的索引
                 if (!string.IsNullOrEmpty(reg.Name)) if (this.nameIndex.Keys.Contains(reg.Name)) this.nameIndex.Remove(reg.Name);
@@ -84,7 +88,7 @@ namespace MYIoc
         public T Resolve<T>()
         {
             register reg = this.typeCollection[typeof(T)][0];
-            return this._resolve<T>(reg,null);
+            return this._resolve<T>(reg, null);
         }
 
         /// <summary>
@@ -96,7 +100,7 @@ namespace MYIoc
         public T Resolve<T>(string name)
         {
             register reg = this.typeCollection.ToList()[nameIndex[name][0]].Value[nameIndex[name][1]];
-            return this._resolve<T>(reg,null);
+            return this._resolve<T>(reg, null);
         }
 
         public IList<T> Resolves<T>()
@@ -104,7 +108,7 @@ namespace MYIoc
             IList<T> retList = new List<T>();
             this.typeCollection[typeof(T)].ToList().ForEach(reg =>
             {
-                retList.Add(this._resolve<T>(reg,null));
+                retList.Add(this._resolve<T>(reg, null));
             });
             return retList;
         }
@@ -115,7 +119,7 @@ namespace MYIoc
             return this._resolve<T>(reg, generic);
         }
 
-        public T ResolveGeneric<T>(string name,Type generic)
+        public T ResolveGeneric<T>(string name, Type generic)
         {
             register reg = this.typeCollection.ToList()[nameIndex[name][0]].Value[nameIndex[name][1]];
             return this._resolve<T>(reg, generic);
@@ -141,7 +145,7 @@ namespace MYIoc
         /// <param name="reg">register</param>
         /// <param name="generic">如果返回类型为泛型，需要设置，通常null</param>
         /// <returns></returns>
-        private T _resolve<T>(register reg,Type generic)
+        private T _resolve<T>(register reg, Type generic)
         {
             Type[] constrTypes = null;
             T ret = default(T);
@@ -177,7 +181,7 @@ namespace MYIoc
                     ret = (T)reg.MapTo.GetConstructor(constrTypes).Invoke(objs);
                 }
             }
-            else ret = (T)Activator.CreateInstance(reg.MapTo);
+            else ret = (T)Activator.CreateInstance(reg.MapTo, true);
 
             if (reg.propertys.Count > 0)
                 reg.propertys.ToList().ForEach(s =>

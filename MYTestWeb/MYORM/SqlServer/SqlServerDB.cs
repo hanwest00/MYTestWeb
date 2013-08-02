@@ -109,8 +109,9 @@ namespace MYORM.SqlServer
                     if (!firstItem)
                         sb.Append(" , ");
                     firstItem = false;
+                    sb.Append(" [");
                     sb.Append(s.Name);
-                    sb.Append(" ");
+                    sb.Append("] ");
                     DBValueType valueType = Attribute.GetCustomAttribute(s, typeof(DBValueType)) as DBValueType;
                     if (valueType != null)
                     {
@@ -195,7 +196,7 @@ namespace MYORM.SqlServer
 
             try
             {
-                return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("drop table {0}", tableName), null);
+                return dbExe.ExeNonQuery(dbMasterConnectString, string.Format("drop table [{0}]", tableName), null);
             }
             catch (Exception)
             {

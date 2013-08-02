@@ -3,7 +3,7 @@ using MYORM.Attributes;
 
 namespace DataModels
 {
-    public class DateInfo : MYORM.Interfaces.MYItemBase, IModels
+    public class DateInfo : MYORM.MYItemBase, IModels
     {
         [PrimaryKey]
         [Identity(1, 1)]

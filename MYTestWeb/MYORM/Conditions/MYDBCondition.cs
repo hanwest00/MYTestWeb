@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MYORM.Conditions
 {
-    public abstract class MYDBCondition : IToQueryable
+    public abstract class MYDBCondition : Interfaces.IToQueryable
     {
         protected string ConditionName;
 
@@ -29,7 +29,7 @@ namespace MYORM.Conditions
 
         public virtual string ToQueryString()
         {
-            return string.Format(" {0} {1} {2} {3} ", Logic.ToString(), PropName, ConditionName, Values[0]);
+            return string.Format(" {0} [{1}] {2} {3} ", Logic.ToString(), PropName, ConditionName, Values[0]);
         }
     }
 }

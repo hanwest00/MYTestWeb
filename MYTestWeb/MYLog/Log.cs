@@ -37,7 +37,7 @@ namespace MYLog
 
         protected virtual string GetFormatString(string format)
         {
-            return format.Replace("[%%DATE%%]", DateTime.Now.Date.ToString("yyyyMMdd")).Replace("[%%DATEFORMAT%%]", DateTime.Now.Date.ToString("yyyy-MM-dd")).Replace("[%%DATETIME%%]", DateTime.Now.Date.ToString("yyyyMMddhhmmss")).Replace("[%%DATETIMEFORMAT%%]", DateTime.Now.Date.ToString("yyyy-MM-dd hh:mm:ss")).Replace("\\r\\n", "\r\n");
+            return format.Replace("[%%DATE%%]", DateTime.Now.Date.ToString("yyyyMMdd")).Replace("[%%DATEFORMAT%%]", DateTime.Now.Date.ToString("yyyy-MM-dd")).Replace("[%%DATETIME%%]", DateTime.Now.Date.ToString("yyyyMMddhhmmss")).Replace("[%%DATETIMEFORMAT%%]", DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")).Replace("\\r\\n", "\r\n");
         }
     }
 }

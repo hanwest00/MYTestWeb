@@ -22,7 +22,8 @@ namespace MYORM.Conditions
 
         public override string ToQueryString()
         {
-            return string.Format(" {0} {1} {2}", ConditionName, PropName, Asc);
+            string sss = string.Format(" {0} [{1}] {2}", ConditionName, PropName, Asc);
+            return string.Format(" {0} [{1}] {2}", ConditionName, PropName, Asc);
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCategory</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("AddCategory", "AdminDemo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <span>类名 : </span>@Html.TextBox("cateName")<br />
+            <span>图片 : </span>@Html.TextBox("image", null, new { id = "upload_img", type = "file" })<br />
+            <span>描述 : </span>@Html.TextBox("description")<br />
+            @Html.TextBox("submit", "submit", new { type = "submit" })  @Html.TextBox("reset", "reset", new { type = "reset" })
+        }
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#upload_img").change(function () { 
+            if($(this).val() != "") {
+               
+            }
+        });
+    });
+</script>

@@ -22,7 +22,7 @@ namespace MYORM.Conditions
             sb.Append(Values[0]);
             sb.Append(" and ");
             sb.Append(Values[1]);
-            return string.Format(" {0} {1} {2} {3} ", (Logic != MYDBLogic.NOTSET ? Logic.ToString() : string.Empty), PropName, ConditionName, sb.ToString());
+            return string.Format(" {0} [{1}] {2} {3} ", Logic.ToString(), PropName, ConditionName, sb.ToString());
         }
     }
 }

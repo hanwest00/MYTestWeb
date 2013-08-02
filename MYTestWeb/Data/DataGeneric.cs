@@ -10,7 +10,7 @@ namespace Data
 {
     public class DataGeneric<T> : IDataGeneric<T> where T : IModels
     {
-        private static ITable<T> orm = DataIoc<T>.GetData();
+        private ITable<T> orm = DataIoc<T>.GetData();
 
         public void Insert(T item)
         {

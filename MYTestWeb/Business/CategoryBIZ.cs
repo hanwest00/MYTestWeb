@@ -18,9 +18,7 @@ namespace Business
 
         public IList<Category> GetCategoryList(int page, int pageSize, int pId)
         {
-
             return DataCollection.CategoryInstance.GetAll(null, page, pageSize, new OrderBy("id", "asc"), null, pId > 0 ? new Equal(MYDBLogic.AND, "pId", pId.ToString()) : null, new OrderBy("order", "asc"));
-
         }
 
         public IList<Category> GetPermitCategoryList(int page, int pageSize, int uId)

@@ -2,7 +2,7 @@
 
 namespace DataModels
 {
-    public class CategoryInfoFliter : MYORM.Interfaces.MYItemBase, IModels
+    public class CategoryInfoFliter : MYORM.MYItemBase, IModels
     {
         [ValueNotNull]
         [Default(0)]

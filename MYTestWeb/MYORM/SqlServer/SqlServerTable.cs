@@ -11,7 +11,7 @@ using System.CodeDom;
 
 namespace MYORM.SqlServer
 {
-    public class SqlServerTable<T> : MYTableBase<T>, Interfaces.ITable<T> where T : MYORM.Interfaces.MYItemBase
+    public class SqlServerTable<T> : MYTableBase<T>, Interfaces.ITable<T> where T : MYORM.MYItemBase
     {
         private SqlServerDB sqlDB = SqlServerDB.GetInstance();
 
@@ -67,7 +67,9 @@ namespace MYORM.SqlServer
                         }
                         valueSb.Append("@");
                         firstPorp = false;
+                        sb.Append(" [");
                         sb.Append(s.Name);
+                        sb.Append("] ");
                         valueSb.Append(s.Name);
                         sqlParams.Add(new SqlParameter(string.Format("@{0}", s.Name), propValue));
                     }
@@ -103,7 +105,9 @@ namespace MYORM.SqlServer
                         else
                             sb.Append(" and ");
                         firstProp = false;
+                        sb.Append(" [");
                         sb.Append(s.Name);
+                        sb.Append("] ");
                         sb.Append(" = @");
                         sb.Append(s.Name);
                         sqlParams.Add(new SqlParameter(string.Format("@{0}", s.Name), propValue));
@@ -161,7 +165,9 @@ namespace MYORM.SqlServer
                         if (!firstProp)
                             sb.Append(",");
                         firstProp = false;
+                        sb.Append(" [");
                         sb.Append(s.Name);
+                        sb.Append("] ");
                         sb.Append(" = @");
                         sb.Append(s.Name);
                         sqlParams.Add(new SqlParameter(string.Format("@{0}", s.Name), propValue));
@@ -192,11 +198,13 @@ namespace MYORM.SqlServer
         public override void Where(IList<MYDBCondition> conds, DbParameter[] sqlParams)
         {
             if (conds != null)
+            {
+                if (whereQuery == null) whereQuery = new StringBuilder();
                 conds.ToList().ForEach(s =>
                 {
-                    whereQuery.Append(s.ToQueryString());
+                    if (s != null) whereQuery.Append(s.ToQueryString());
                 });
-
+            }
             if (sqlParams != null)
                 selectParams = sqlParams;
         }
@@ -207,10 +215,13 @@ namespace MYORM.SqlServer
         public override void Join(params MYDBQJoin[] joinTables)
         {
             if (joinTables != null)
+            {
+                if (joinQuery == null) joinQuery = new StringBuilder();
                 joinTables.ToList().ForEach(s =>
                 {
                     joinQuery.Append(s.ToQueryString());
                 });
+            }
         }
 
         //public override void Union(params MYTableBase<T>[] Tables)
@@ -223,7 +234,7 @@ namespace MYORM.SqlServer
         /// <returns>结果集合</returns>
         public override IList<T> Select(params string[] fields)
         {
-           return this.Select(0, 0, null, fields);
+            return this.Select(0, 0, null, fields);
         }
 
         public override IList<T> Select(int page, int pageNum, OrderBy pageOrder, params string[] fields)
@@ -242,7 +253,9 @@ namespace MYORM.SqlServer
                         if (!first)
                             sb.Append(",");
                         first = false;
+                        sb.Append(" [");
                         sb.Append(s);
+                        sb.Append("] ");
                     });
                 else
                     sb.Append("*");
@@ -256,20 +269,20 @@ namespace MYORM.SqlServer
                     sb.Append("] ");
                 }
 
-                if (joinQuery.Length > 0)
+                if (joinQuery != null)
                 {
                     sb.Append(joinQuery.ToString());
-                    joinQuery.Clear();
+                    joinQuery.Length = 0;
                 }
 
                 sb.Append(" where 1 = 1 ");
 
                 if (isPage) sb.Append(string.Format("and row between {0} and {1} ", (page - 1) * pageNum + 1, page * pageNum));
 
-                if (whereQuery.Length > 0)
+                if (whereQuery != null)
                 {
                     sb.Append(whereQuery.ToString());
-                    whereQuery.Clear();
+                    whereQuery.Length = 0;
                 }
 
                 return sqlDB.dbExe.ExeReaderToList<T>(null, sb.ToString(), selectParams);
@@ -290,12 +303,13 @@ namespace MYORM.SqlServer
         {
             if (string.IsNullOrEmpty(fieldName)) return null;
             StringBuilder sb = new StringBuilder("select ");
+            sb.Append(" [");
             sb.Append(fieldName);
-
-            if (joinQuery.Length > 0)
+            sb.Append("] ");
+            if (joinQuery != null)
             {
                 sb.Append(joinQuery.ToString());
-                joinQuery.Clear();
+                joinQuery.Length = 0;
             }
 
             sb.Append(" where 1 = 1 ");
