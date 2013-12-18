@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MYORM.Attributes.Datebase" Collapsed="true">
+    <Position X="34.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Datebase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.DBValueType" Collapsed="true">
+    <Position X="36.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Attributes\DBValueType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.Default" Collapsed="true">
+    <Position X="38.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Attributes\Default.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.ForeignKey" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Attributes\ForeignKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.Identity" Collapsed="true">
+    <Position X="33" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Attributes\Identity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.PrimaryKey" Collapsed="true">
+    <Position X="33" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\PrimaryKey.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.Table" Collapsed="true">
+    <Position X="34.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.Unique" Collapsed="true">
+    <Position X="31.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\Unique.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Attributes.ValueNotNull" Collapsed="true">
+    <Position X="33" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\ValueNotNull.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.Equal" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\Equal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.Exists" Collapsed="true">
+    <Position X="13" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\Exists.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.GroupBy" Collapsed="true">
+    <Position X="17.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\GroupBy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.In" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\In.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.Less" Collapsed="true">
+    <Position X="26.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\Less.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.LessEqual" Collapsed="true">
+    <Position X="1.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\LessEqual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.Like" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\Like.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.More" Collapsed="true">
+    <Position X="10.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\More.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.MoreEqual" Collapsed="true">
+    <Position X="15.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\MoreEqual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.NotEqual" Collapsed="true">
+    <Position X="19.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\NotEqual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.NotExists" Collapsed="true">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\NotExists.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.NotIn" Collapsed="true">
+    <Position X="28.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\NotIn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Conditions.OrderBy" Collapsed="true">
+    <Position X="4" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Conditions\OrderBy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Exceptions.ConnectionNullExpection" Collapsed="true">
+    <Position X="31.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ConnectionNullExpection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Exceptions.CreateDBException" Collapsed="true">
+    <Position X="33" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CreateDBException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Exceptions.TableContianException" Collapsed="true">
+    <Position X="36.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\TableContianException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.Exceptions.TableNotContianException" Collapsed="true">
+    <Position X="38.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\TableNotContianException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.MYDBBase" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAgAAAAAAAQABAAAAAQAABAAAAAAAARAAAABAAA=</HashCode>
+      <FileName>MYDBBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.MYDBCondition" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAQAAAAAAAAAAAAAAAAAAACAAAAACAgAAAAAAA=</HashCode>
+      <FileName>MYDBCondition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MYORM.MYDBEXE" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAkgQAAgAAAAAAAAAAAAAAAABAAEgAAAAAABAAAA=</HashCode>
+      <FileName>MYDBEXE.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.MYDBFunction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="34.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MYDBFunction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MYORM.MYDBQJoin" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="36.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQAAAAAAAIA=</HashCode>
+      <FileName>MYDBQJoin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MYORM.MYDBQUnion" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="38.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>MYDBQUnion.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MYORM.MYItemBase" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MYItemBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.MYTableBase&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAACAAAAAgAAAAAAAAAAAEAIAADAAACQQAAAAA=</HashCode>
+      <FileName>MYTableBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.SqlServer.SqlDBEXE" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAkgAAAgAAAAAAAAAAAAABABAAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>SqlServer\SqlDBEXE.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.SqlServer.SqlServerDB" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAQABAAAAAQABBBAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SqlServer\SqlServerDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MYORM.SqlServer.SqlServerTable&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAAAAAAgAAAAAAAEABAFAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>SqlServer\SqlServerTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MYORM.Interfaces.IToQueryable" Collapsed="true">
+    <Position X="31.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IToQueryable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="MYORM.MYDBConditionType" Collapsed="true">
+    <Position X="31.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAQAAAAAAAAABAAAAACEACEogAAGAAAAAAAAAIA=</HashCode>
+      <FileName>MYDBConditionType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MYORM.MYDBLogic" Collapsed="true">
+    <Position X="33" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAgIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MYDBLogic.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MYORM.MYDBType" Collapsed="true">
+    <Position X="34.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAgAgAAAAQAAAAAAAA=</HashCode>
+      <FileName>MYDBType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="新細明體" Size="9" />
+</ClassDiagram>

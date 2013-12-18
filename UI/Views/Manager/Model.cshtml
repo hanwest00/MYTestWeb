@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Model</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/bootstrap/easyui.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/icon.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/CommonCss/Base.css")" />
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery-1.8.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery.easyui.min.js")"></script>
+</head>
+<body>
+    <div>
+    </div>
+    <div>
+        @using (Html.BeginForm("Model", "Manager", FormMethod.Post))
+        {
+            @Html.TextBox("modeName", null, new { Class = "easyui-validatebox" })<br />
+            @Html.TextBox("mType", null, new { id = "type-combobox" })<br />
+            @Html.TextBox("submit", "submit", new { type = "submit" })
+        }
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function() { 
+        $("#type-combobox").combobox({
+                data: [
+                       { "name": "@Resources.ManagerLabel.ModelTypeShortText", "type": 0 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeText", "type": 1 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeImage", "type": 2 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeFile", "type": 3 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeDate", "type": 4 }
+                       ],
+                valueField: 'type',
+                textField: 'name',
+				panelWidth: 350,
+				panelHeight: 'auto',
+				formatter: formatItem
+        });
+    });
+
+    function formatItem(row) {
+        var info = "";
+        switch (row.type) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+
+        var s = '<span style="font-weight:bold">' + row.name + '</span><br/>' +
+					'<span style="color:#888">' + info + '</span>';
+        return s;
+    }
+</script>

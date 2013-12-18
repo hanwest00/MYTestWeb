@@ -16,5 +16,24 @@ namespace UI.Controllers
             return View();
         }
 
+        public ActionResult Category()
+        {
+            return View();
+        }
+
+        public ActionResult CategoryModel()
+        {
+            return View();
+        }
+
+        public ActionResult System()
+        {
+            return View();
+        }
+
+        public JsonResult GetCategoryJsonData()
+        {
+            return this.Json(null);
+        }
     }
 }

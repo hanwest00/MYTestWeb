@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Model</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/bootstrap/easyui.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/icon.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/CommonCss/Base.css")" />
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery-1.8.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery.easyui.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Data/Scripts/jquery.form.mini.js")"></script>
+</head>
+<body>
+    <div>
+        <table id="ModelList" style="width: 100%; height: 100%;"></table>
+    </div>
+
+    <div id="ModelEditWindow" class="easyui-window" title="Window" data-options="mode:false,closed:true,iconCls:'icon-save'" style="width: 300px; height: 150px; padding: 10px;">
+        @using (Html.BeginForm("CategoryModelAdd", "Manager", FormMethod.Post))
+        {
+            <span>Model名称 :</span> @Html.TextBox("modeName", null, new { Class = "easyui-validatebox" })<br /><br />
+            <span>Model类别 :</span> @Html.TextBox("mType", null, new { id = "type-combobox" })<br /><br />
+            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">添 加</a>
+        }
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#type-combobox").combobox({
+            data: [
+                       { "name": "@Resources.ManagerLabel.ModelTypeShortText", "type": 0 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeText", "type": 1 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeImage", "type": 2 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeFile", "type": 3 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeDate", "type": 4 }
+                       ],
+            valueField: 'type',
+            textField: 'name',
+            panelWidth: 350,
+            panelHeight: 'auto',
+            formatter: function (row) {
+                var s = '<span style="font-weight:bold">' + row.name + '</span><br/>' +
+					'<span style="color:#888">' + getInfoByType(row.type) + '</span>';
+                return s;
+            }
+        });
+
+        $('#ModelList').datagrid({
+            title: '已定义的Model',
+            rownumbers: true,
+            singleSelect: true,
+            pagination: true,
+            rownumbers: true,
+            url: 'datagrid_data1.json',
+            loadMsg: 'Loading......',
+            columns: [[
+                        { title: 'ID', field: 'id', width: '100', rowspan: 2, align: 'center' },
+                        { title: 'Model名称', field: 'mName', width: '200', rowspan: 2, align: 'center' },
+                        { title: 'Model类型', field: 'mType', width: '200', rowspan: 2, align: 'center',
+                            formatter: function (val, rec) {
+                               return getInfoByType(val);
+                            }
+                        }
+                      ]]
+        });
+
+        $('#ModelList').datagrid('resize', {
+            height: $(document.body).height(),
+            width: $(document.body).width()
+        });
+
+        $(function () {
+            var pager = $('#ModelList').datagrid('getPager'); // get the pager of datagrid
+            pager.pagination({
+                buttons: [{
+                    iconCls: 'icon-search',
+                    handler: function () {
+                        alert('search');
+                    }
+                }, {
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        $("#ModelEditWindow").window('open');
+                    }
+                }, {
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        alert('edit');
+                    }
+                }],
+                displayMsg: '从{from}到{to}共{total}记录',
+                onBeforeRefresh: function (pageNumber, pageSize) {
+                    $(this).pagination('loading');
+                    alert('pageNumber:' + pageNumber + ',pageSize:' + pageSize);
+                    $(this).pagination('loaded');
+                }
+            });
+        })
+    });
+
+    function getInfoByType(type)
+    {
+        var info = "";
+        switch (type) {
+            case 0:
+                info = "{text 图片}"
+                break;
+            case 1:
+                info = "{textarea 图片}"
+                break;
+            case 2:
+                info = "{image 图片}"
+                break;
+            case 3:
+                info = "{file 图片}"
+                break;
+            case 4:
+                info = "{date 图片}"
+                break;
+        }
+        return info;
+    }
+
+    function submitForm()
+    {
+        $("#ModelEditWindow")).ajaxSubmit({ 
+            success: function (data) {   
+              if(data == "OK")
+              {
+                 $("#ModelEditWindow").window('close');
+              }
+            }
+        });
+    }
+</script>

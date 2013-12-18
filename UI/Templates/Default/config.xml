@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  name:模版显示的名称
+  contentfolder: 资源目录的地址
+    1,base 为根目录下Data目录下的Content目录(默认)
+    2,this 为当前目录下的Content目录
+    3,自定义,如10.0.0.1/Content,程序就会访问远程的资源目录
+-->
+<template name="默认" contentfolder="base"></template>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MYORM</RootNamespace>
+    <AssemblyName>MYORM</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\Datebase.cs" />
+    <Compile Include="Attributes\DBValueType.cs" />
+    <Compile Include="Attributes\Default.cs" />
+    <Compile Include="Attributes\ForeignKey.cs" />
+    <Compile Include="Attributes\Identity.cs" />
+    <Compile Include="Attributes\PrimaryKey.cs" />
+    <Compile Include="Attributes\Table.cs" />
+    <Compile Include="Attributes\Unique.cs" />
+    <Compile Include="Attributes\ValueNotNull.cs" />
+    <Compile Include="Conditions\Between.cs" />
+    <Compile Include="Conditions\Equal.cs" />
+    <Compile Include="Conditions\Exists.cs" />
+    <Compile Include="Conditions\GroupBy.cs" />
+    <Compile Include="Conditions\In.cs" />
+    <Compile Include="Conditions\Less.cs" />
+    <Compile Include="Conditions\LessEqual.cs" />
+    <Compile Include="Conditions\Like.cs" />
+    <Compile Include="Conditions\More.cs" />
+    <Compile Include="Conditions\MoreEqual.cs" />
+    <Compile Include="Conditions\MYDBCondition.cs" />
+    <Compile Include="Conditions\MYDBConditionType.cs" />
+    <Compile Include="Conditions\MYDBFunction.cs" />
+    <Compile Include="Conditions\MYDBLogic.cs" />
+    <Compile Include="Conditions\MYDBQJoin.cs" />
+    <Compile Include="Conditions\MYDBQUnion.cs" />
+    <Compile Include="Conditions\NotEqual.cs" />
+    <Compile Include="Conditions\NotExists.cs" />
+    <Compile Include="Conditions\NotIn.cs" />
+    <Compile Include="Conditions\OrderBy.cs" />
+    <Compile Include="Exceptions\ConnectionNullExpection.cs" />
+    <Compile Include="Exceptions\CreateDBException.cs" />
+    <Compile Include="Exceptions\TableContianException.cs" />
+    <Compile Include="Exceptions\TableNotContianException.cs" />
+    <Compile Include="ExFunc.cs" />
+    <Compile Include="Interfaces\ITable.cs" />
+    <Compile Include="Interfaces\IToQueryable.cs" />
+    <Compile Include="MYDBBase.cs" />
+    <Compile Include="MYDBEXE.cs" />
+    <Compile Include="MYDBType.cs" />
+    <Compile Include="MYItemBase.cs" />
+    <Compile Include="MYTableBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServer\SqlDBEXE.cs" />
+    <Compile Include="SqlServer\SqlServerDB.cs" />
+    <Compile Include="SqlServer\SqlServerTable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServer\SqlFunctions\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

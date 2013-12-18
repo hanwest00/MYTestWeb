@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>MYWEBTEST</title>
+	<link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/bootstrap/easyui.css")" />
+	<link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/themes/icon.css")" />
+	<link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/CommonCss/Base.css")" />
+	<script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery-1.8.0.min.js")"></script>
+	<script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery.easyui.min.js")"></script>
+	<style>
+		#main-nav {
+			list-style:none;
+			width:170px;
+			margin:0 auto;
+			padding:0px;
+		}
+		#main-nav li {
+			margin-top:5px;
+			line-height:30px;
+			width:170px;
+			text-align:center;
+			background:#ccc;
+			font-size:14px;
+			cursor:pointer;
+			color:#fff;
+			font-weight:600;
+		}
+	</style>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north',border:false" style="height:70px;background:#ccc;padding:10px">
+        <h1>MYWEBTEST CMS</h1>
+	    <a href="javascript:void(0);" class="easyui-linkbutton" onclick="openManagerView('内容类别管理','Category')">栏目管理</a> 
+        <a href="javascript:void(0);" class="easyui-linkbutton" onclick="openManagerView('类别模型管理','CategoryModel')">栏目模型管理</a>
+        <a href="javascript:void(0);" class="easyui-linkbutton" onclick="openManagerView('系统管理','System')">系统管理</a> 
+	</div>
+	<div data-options="region:'west',split:true,title:'栏目'" style="width:200px;">
+		<!--ul id="main-nav">
+			<li tabname="tab1" url="datagrid/cellstyle.html" >item1</li>
+			<li tabname="tab2" url="http://www.baidu.com">item2</li>
+			<li tabname="tab3" url="http://www.baidu.com">item3</li>
+			<li tabname="tab4" url="http://www.baidu.com">item4</li>
+			<li tabname="tab5" url="http://www.baidu.com">item5</li>
+		</ul-->
+		<ul id="tt" class="easyui-tree"></ul>
+	</div>
+	<!--div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region</div-->
+	<div data-options="region:'south',border:false" style="height:50px;background:#999;padding:10px;">Copyright</div>
+	<div id="main-tabs" class="easyui-tabs" data-options="region:'center',title:'',tools:'#tab-tools'"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".layout-button-left").click(function () {
+            $("#main-tabs .tabs-header").css("width", "100%");
+            $("#main-tabs .tabs-wrap").css("width", "100%");
+            $("#main-tabs .tabs-panels").css("width", "100%");
+            $("#main-tabs .panel").css("width", "100%");
+            $("#main-tabs .panel-body").css("width", "100%");
+        });
+
+        $("#main-nav li").click(function () {
+            openTab($(this).attr("tabname"), $(this).attr("url"));
+        });
+
+        $("#main-nav li").mouseover(function () {
+            $(this).css("background", "#999");
+        });
+
+        $("#main-nav li").mouseout(function () {
+            $(this).css("background", "#ccc");
+        });
+
+        $('#tt').tree({
+            url: 'tree/tree_data1.json',
+            checkbox: false,
+            animate: true,
+            onClick: function (node) {
+                openTab(node.text, "http://www.baidu.com");
+            }
+        });
+
+        $('#main-tabs').tabs({
+            onBeforeClose: function (title) {
+                //$('#' + title + 'ifm').tabs('resize'); 
+                try {
+                    //在tab关闭前关闭iframe
+                    document.getElementById(title + 'ifm').contentWindow.document.write('');
+                    document.getElementById(title + 'ifm').contentWindow.close();
+                    document.getElementById(title + 'ifm').remove();
+                    if ($.browser.msie) { CollectGarbage(); }
+                }
+                catch (err) {
+
+                }
+            }
+        });
+    });
+
+    function openTab(name, url) {
+        if ($('#main-tabs').tabs('exists', name)) {
+            $('#main-tabs').tabs('select', name)
+            return;
+        }
+
+        $('#main-tabs').tabs('add', {
+            title: name,
+            content: '<div style="padding:10px"><iframe frameBorder="0" style="width:100%;height:430px;border:none;" id="' + name + 'ifm" src="' + url + '"></iframe></div>',
+            closable: true
+        });
+    }
+
+    function openManagerView(title, view) {
+        openTab(title, "/Manager/" + view);
+    }
+
+    function remove() {
+        var tab = $('#main-tabs').tabs('getSelected');
+        if (tab) {
+            var index = $('#main-tabs').tabs('getTabIndex', tab);
+            $('#main-tabs').tabs('close', index);
+        }
+    }
+</script>

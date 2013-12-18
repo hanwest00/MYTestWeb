@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A1C2185-5042-402A-9BA4-9D04F209DAB0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Business</RootNamespace>
+    <AssemblyName>Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CategoryBIZ.cs" />
+    <Compile Include="CategoryFliterBIZ.cs" />
+    <Compile Include="CategoryInfoBIZ.cs" />
+    <Compile Include="CategoryInfoFliterBIZ.cs" />
+    <Compile Include="CategoryModelBIZ.cs" />
+    <Compile Include="DataCollection.cs" />
+    <Compile Include="FliterBIZ.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DateInfoBIZ.cs" />
+    <Compile Include="UserBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModels\DataModels.csproj">
+      <Project>{A853B16E-B5CC-41C3-BF1D-990655D457E1}</Project>
+      <Name>DataModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{635D2502-EFE6-4DCB-B09B-152E9B711EA0}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBusiness\IBusiness.csproj">
+      <Project>{C9CB9EBF-C04C-4812-9FD6-25F731A74BA3}</Project>
+      <Name>IBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MYORM\MYORM.csproj">
+      <Project>{5F755EB8-4E0A-4E0C-86D7-6831E8B0A3AA}</Project>
+      <Name>MYORM</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TextInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ShortTextInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PrivilegeBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ModelsBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LogsBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImageInfoBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GroupBIZ.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileInfoBIZ.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

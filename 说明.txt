@@ -1,0 +1,152 @@
+﻿orm的实现:
+   1,使用attribute来映射数据库关系.
+
+   2,分为db table item三种类型,
+   table到db之间的关系用attribute,
+   table到item之间的关系用<T>，
+   item到table之间的关系用attribute.
+
+   3,自动建立数据库
+     1) sqlserver
+        如果数据库不存在则自动创建，
+        创建前确保链接字符串的Database参数已经设置为Master,
+        然后执行创建数据库sql创建之.
+		String str;
+        SqlConnection myConn = new SqlConnection ("Server=localhost;Integrated security=SSPI;database=master");
+	    
+        str = "CREATE DATABASE MyDatabase ON PRIMARY " +
+            "(NAME = MyDatabase_Data, " +
+            "FILENAME = 'C:\\MyDatabaseData.mdf', " +
+            "SIZE = 2MB, MAXSIZE = 10MB, FILEGROWTH = 10%) " +
+            "LOG ON (NAME = MyDatabase_Log, " +
+            "FILENAME = 'C:\\MyDatabaseLog.ldf', " +
+            "SIZE = 1MB, " +
+            "MAXSIZE = 5MB, " +
+            "FILEGROWTH = 10%)";
+	    
+        SqlCommand myCommand = new SqlCommand(str, myConn);
+        try 
+        {
+            myConn.Open();
+	    myCommand.ExecuteNonQuery();
+	    MessageBox.Show("DataBase is Created Successfully", "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (System.Exception ex)
+        {
+	    MessageBox.Show(ex.ToString(), "MyProgram", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        finally
+        {
+	    if (myConn.State == ConnectionState.Open)
+	    {
+	        myConn.Close();
+	    }
+        }
+
+	4,语句实例化后的优先级(未实现)
+
+	5,实现多个数据库的类库之后 需要一个抽象的接口层来给上层调用
+	  可以使用接口来做依赖注入 或者使用抽象工厂来创建类
+
+ORM已实现，下一步许实现一个cms来测试ORM的功能和性能
+
+
+
+项目类库概要：
+1, MYIoc 为依赖注入库
+2, MYORM 为ORM
+3，MYLog 为Log库 (写文件)
+
+
+
+***********
+   重点
+***********
+
+1，关于属性反射的后期优化现阶段未完成,希望可以使用emit，或者表达式树来实现，需要补充这方面的知识。
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+关于cms：
+1,预定义一批常用的调用控件
+
+
+/*2,可以在widget中自定义控件,自定义控件使用简单的模版语言 例如:<xx:LIST name="getXX" models="item,cate,user,order"
+  relation="item in cate " getFieds="name=item.name,uname=user.name">.....
+  定义好后,可在模版中直接使用,如:
+  <ul>
+  [Widget:getXX]
+     <li>[name] - [uname]</li>
+  [/Widget:getXX]
+  </ul>*/
+
+
+
+3,内容模型为：category 包含多个 model , 一个model 对应一种内容类型（文字、图片、文件、等）. 
+  后台管理流程: 首先新建分类(category) 然后添加model。
+
+
+
+/***************************************************************************************************************/
+ 在data层中所有需要sql语句的地方都应该在ORM中有封装的方法来调用，不然就会使IOC 的多数据库支持无意义,
+ 所以需要在ORM中封装更多的方法来满足不同的查询需要（需想出一个好的解决方法）
+
+ 已解决，方法为：
+   1，把orm的对外接口放入新的类库MYORM.Interfaces中，条件类型放入新的类库MYORM.Conditions中,
+   之前在类库MYORM中的Interfaces和Conditions命名空间移除，
+   在IOC orm时只需引入MYORM.Interfaces和MYORM.Conditions而不需要引入核心的MYORM类库，这样上层对MYORM的依赖可以取消，
+   达到上层和底层之间依赖于接口的目的,从而解耦。
+ *********
+ *理解有误* 程序集(DLL,包)的引入并不会产生耦合,耦合产生的关键是在类中的实例化,所以并不用做以上步骤来"解耦".
+ *********
+
+ /***************************************************************************************************************/ 
+
+
+ 数据库结构简要说明：
+ Category ........................ 内容的类别
+ CategoryFliter .................. 类别与过滤器之间的关系 (过滤器类似于模型,但是过滤器主要表达的是逻辑关系是和否,用来区别标识某
+                                   一条信息的特殊性)
+ CategoryInfo .................... 类别中的每条记录
+ CategoryInfoFliter .............. 类别中的每条记录对应的过滤器(s)和值,值为0和1,默认表述是或否的关系,后台解析为一个是和否的
+								   select元素
+ CategoryModel ................... 类别与内容模型的关系(每一个类别中有多个模型每一个模型代表一种数据类型，模型可以新建，
+                                   每一个模型都是唯一的所以模型是可以复用的)
+ DateInfo ........................ 以Info结尾的表都是用来存放每条记录中每个模型所对应的值的
+     .
+	 .
+	 .
+	 .
+	 .
+ Fliter .......................... 过滤器
+ Group ........................... 用户群组
+ Logs ............................ log类可用来记录系统运行中的记录
+ Models .......................... 模型
+ Privilege ....................... 群组操作类别和系统功能的权限
+ User ............................ 用户信息
+
+ 流程:
+   1)查询信息
+    先在CategoryModel中找到类别所有的模型，然后在CategoryFliter中找到类别所有的过滤器，建立出类别的内容模型，然后到相应的
+	然后在CategoryInfo中取出类别中信息的所有记录，最后针对没一条记录，到相应的表中去取数据
+   2)新增类别
+    首先要先新增模型和过滤器然后新增类别,之后选择类别所需要的模型与过滤器,模型和过滤器可以复用所有的类别都可以选择系统中所存
+	在的一切模型和过滤器
+   3)删除信息
+
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+ #大文件上传
+	1,使用HttpWorkRequest获取请求流，用Content-Type头来定位文件流在请求流中的位置，读取文件流，写入文件，若未读取完，继续
+	读取并写入知道流中当前文件尾的标识，然后继续向下,读取如果还有数据则判断是否为文件，并重复写入文件的步骤，最后把除去文件
+	内容的请求流，用反射写入当前请求(HttpContext.Current.Request)的_wr字段,让服务端继续响应请求。
+
+	*大文件上传已经实现，可能有少许bug需要后期测试修正(进度部分已经调整，使用伪comet实现)
+
+
+#关于数据库结构设计导致查询复制的问题
+	需要使用静态页面来杜绝直接查询
