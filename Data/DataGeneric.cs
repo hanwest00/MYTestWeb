@@ -108,7 +108,7 @@ namespace Data
                 orm.Join(joins);
                 orm.Where(condList, null);
 
-                return orm.Select(fields);
+                return orm.Select(page, pageNum, pageOrder, fields);
             }
             catch (Exception)
             {

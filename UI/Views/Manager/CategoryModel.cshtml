@@ -11,70 +11,44 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("../../Data/UI/CommonCss/Base.css")" />
     <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery-1.8.0.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery.easyui.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("../../Data/Scripts/jquery.form.mini.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/jquery.form.mini.js")"></script>
+    <script type="text/javascript" src="@Url.Content("../../Data/UI/Scripts/easyloader.js")"></script>
 </head>
 <body>
-    <div>
-        <table id="ModelList" style="width: 100%; height: 100%;"></table>
-    </div>
-
-    <div id="ModelEditWindow" class="easyui-window" title="Window" data-options="mode:false,closed:true,iconCls:'icon-save'" style="width: 300px; height: 150px; padding: 10px;">
-        @using (Html.BeginForm("CategoryModelAdd", "Manager", FormMethod.Post))
-        {
-            <span>Model名称 :</span> @Html.TextBox("modeName", null, new { Class = "easyui-validatebox" })<br /><br />
-            <span>Model类别 :</span> @Html.TextBox("mType", null, new { id = "type-combobox" })<br /><br />
-            <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()">添 加</a>
-        }
+    <div class="easyui-panel right-panel-main" title="#当前位置:<b>类别模型管理</b>">
+        <table id="mode-list">
+        </table>
     </div>
 </body>
 </html>
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#type-combobox").combobox({
-            data: [
-                       { "name": "@Resources.ManagerLabel.ModelTypeShortText", "type": 0 },
-                       { "name": "@Resources.ManagerLabel.ModelTypeText", "type": 1 },
-                       { "name": "@Resources.ManagerLabel.ModelTypeImage", "type": 2 },
-                       { "name": "@Resources.ManagerLabel.ModelTypeFile", "type": 3 },
-                       { "name": "@Resources.ManagerLabel.ModelTypeDate", "type": 4 }
-                       ],
-            valueField: 'type',
-            textField: 'name',
-            panelWidth: 350,
-            panelHeight: 'auto',
-            formatter: function (row) {
-                var s = '<span style="font-weight:bold">' + row.name + '</span><br/>' +
-					'<span style="color:#888">' + getInfoByType(row.type) + '</span>';
-                return s;
-            }
-        });
-
-        $('#ModelList').datagrid({
+        $('#mode-list').datagrid({
             title: '已定义的Model',
             rownumbers: true,
             singleSelect: true,
             pagination: true,
             rownumbers: true,
-            url: 'datagrid_data1.json',
+            url: 'GetModelJsonData',
             loadMsg: 'Loading......',
             columns: [[
                         { title: 'ID', field: 'id', width: '100', rowspan: 2, align: 'center' },
                         { title: 'Model名称', field: 'mName', width: '200', rowspan: 2, align: 'center' },
                         { title: 'Model类型', field: 'mType', width: '200', rowspan: 2, align: 'center',
                             formatter: function (val, rec) {
-                               return getInfoByType(val);
+                                return getInfoByType(val);
                             }
                         }
                       ]]
         });
 
-        $('#ModelList').datagrid('resize', {
+        $('#mode-list').datagrid('resize', {
             height: $(document.body).height(),
-            width: $(document.body).width()
+            width: $(document.body).width() * 0.99
         });
 
         $(function () {
-            var pager = $('#ModelList').datagrid('getPager'); // get the pager of datagrid
+            var pager = $('#mode-list').datagrid('getPager'); // get the pager of datagrid
             pager.pagination({
                 buttons: [{
                     iconCls: 'icon-search',
@@ -84,26 +58,28 @@
                 }, {
                     iconCls: 'icon-add',
                     handler: function () {
-                        $("#ModelEditWindow").window('open');
+                        loadAddWindow();
                     }
                 }, {
                     iconCls: 'icon-edit',
                     handler: function () {
-                        alert('edit');
+                        loadEditWindow();
                     }
                 }],
                 displayMsg: '从{from}到{to}共{total}记录',
                 onBeforeRefresh: function (pageNumber, pageSize) {
                     $(this).pagination('loading');
-                    alert('pageNumber:' + pageNumber + ',pageSize:' + pageSize);
+                    //alert('pageNumber:' + pageNumber + ',pageSize:' + pageSize);
                     $(this).pagination('loaded');
                 }
             });
         })
     });
+    var addWindow;
+    var editWindow
 
-    function getInfoByType(type)
-    {
+
+    function getInfoByType(type) {
         var info = "";
         switch (type) {
             case 0:
@@ -125,14 +101,120 @@
         return info;
     }
 
-    function submitForm()
-    {
-        $("#ModelEditWindow")).ajaxSubmit({ 
-            success: function (data) {   
-              if(data == "OK")
-              {
-                 $("#ModelEditWindow").window('close');
-              }
+    function submitForm() {
+        $("#add-form").ajaxSubmit({
+            success: function (data) {
+                if (data == "OK") {
+                    $('#add-form').parent().parent().remove();
+                    $('#mode-list').datagrid('reload');
+                }
+            }
+        });
+    }
+
+    function submitEditForm() {
+        $("#edit-form").ajaxSubmit({
+            success: function (data) {
+                if (data == "OK") {
+                    $('#edit-form').parent().parent().remove();
+                    $('#mode-list').datagrid('reload');
+                }
+            }
+        });
+    }
+
+    function loadAddWindow() {
+        if ($('#add-form').length > 0) {
+            var p = $('#add-form').parent().parent();
+            var l = parseInt(p.css("left").replace("px",""));
+            p.animate({
+                left: (l - 5) + 'px'
+            },50);
+            $('#add-form').parent().parent().animate({
+                left: (l + 5) + 'px'
+            }, 50);
+            $('#add-form').parent().parent().animate({
+                left: l + 'px'
+            }, 50);
+            return;
+        }
+        addWindow = $.messager.show({
+            title: '新增',
+            msg: '<form id="add-form" action="CategoryModelAddOrModify" method="post"><span>Model名称 :</span> <input name="modeName" class="easyui-validatebox" /><br /><br /><span>Model类型 :</span> <input name="modeType" value="0" class="type-combobox" /><br /><br /><a href="javascript:void(0)" id="add-submit-btn" onclick="submitForm()">添 加</a></form>',
+            showType: 'slide',
+            showSpeed: 300,
+            width: 250,
+            height: 150,
+            timeout: 0,
+            style: {
+                right: '',
+                top: document.body.scrollTop + document.documentElement.scrollTop,
+                bottom: ''
+            }
+        });
+        bindTypeOnSelect("type-combobox");
+        $("#add-submit-btn").linkbutton();
+    }
+
+    function loadEditWindow() {
+        var select = $('#mode-list').datagrid('getSelected');
+        if (select == null) {
+            return;
+        }
+        if ($('#edit-form').length > 0) {
+            var p = $('#edit-form').parent().parent();
+            var l = parseInt(p.css("left").replace("px", ""));
+            p.animate({
+                left: (l - 5) + 'px'
+            }, 50);
+            $('#edit-form').parent().parent().animate({
+                left: (l + 5) + 'px'
+            }, 50);
+            $('#edit-form').parent().parent().animate({
+                left: l + 'px'
+            }, 50);
+            return;
+        }
+        editWindow = $.messager.show({
+            title: '修改',
+            msg: '<form id="edit-form" action="CategoryModelAddOrModify" method="post"><input name="modeId" type="hidden" value="' + select.id + '" /><span>Model名称 :</span> <input name="modeName" class="easyui-validatebox" value="' + select.mName + '" /><br /><br /><span>Model类型 :</span> <input name="modeType" value="' + select.mType + '" class="edit-type-combobox" /><br /><br /><a href="javascript:void(0)" id="edit-submit-btn" onclick="submitEditForm()">添 加</a></form>',
+            showType: 'slide',
+            showSpeed: 300,
+            width: 250,
+            height: 150,
+            timeout: 0,
+            style: {
+                right: '',
+                top: document.body.scrollTop + document.documentElement.scrollTop,
+                bottom: ''
+            }
+        });
+        bindTypeOnSelect("edit-type-combobox", select.mType);
+        $("#edit-submit-btn").linkbutton();
+    }
+
+    function bindTypeOnSelect(classname,selectValue) {
+        $("." + classname).combobox({
+            data: [
+                       { "name": "@Resources.ManagerLabel.ModelTypeShortText", "type": 0 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeText", "type": 1 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeImage", "type": 2 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeFile", "type": 3 },
+                       { "name": "@Resources.ManagerLabel.ModelTypeDate", "type": 4 }
+                       ],
+            valueField: 'type',
+            textField: 'name',
+            panelWidth: 350,
+            panelHeight: 'auto',
+            formatter: function (row) {
+                var s = '<span style="font-weight:bold">' + row.name + '</span><br/>' +
+					        '<span style="color:#888">' + getInfoByType(row.type) + '</span>';
+                return s;
+            },
+            onLoadSuccess: function () {
+                if (selectValue != null) {
+                    $("." + classname).combobox('select', selectValue);
+                }
             }
         });
     }

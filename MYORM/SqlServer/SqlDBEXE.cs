@@ -14,11 +14,9 @@ namespace MYORM.SqlServer
 
         #region Singleton
         private static SqlDBEXE instance = null;
-
+        private static object lockObj = new object();
         public static SqlDBEXE GetInstance(string connString)
         {
-            object lockObj = new object();
-
             System.Threading.Monitor.Enter(lockObj);
             if (instance == null)
                 instance = new SqlDBEXE(connString);

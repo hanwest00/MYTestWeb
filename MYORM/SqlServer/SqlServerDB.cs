@@ -13,7 +13,7 @@ namespace MYORM.SqlServer
     {
         #region Singleton
         private static SqlServerDB instance = null;
-
+        private static object lockObj = new object();
         /// <summary>
         /// 单件模式返回SqlServerDB实例
         /// </summary>
@@ -23,9 +23,6 @@ namespace MYORM.SqlServer
         /// <returns>SqlServerDB 实例</returns>
         public static SqlServerDB GetInstance()
         {
-
-            object lockObj = new object();
-
             System.Threading.Monitor.Enter(lockObj);
             if (instance == null)
                 instance = new SqlServerDB();

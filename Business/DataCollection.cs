@@ -9,12 +9,13 @@ namespace Business
 {
     public static class DataCollection
     {
+        private static object lockCategoryObj = new object();
         private static IDataGeneric<Category> categoryInstance;
         public static IDataGeneric<Category> CategoryInstance
         {
             get
             {
-                lock (new object())
+                lock (lockCategoryObj)
                 {
                     if (categoryInstance == null) categoryInstance = new DataGeneric<Category>();
                 }
@@ -22,12 +23,13 @@ namespace Business
             }
         }
 
+        private static object lockCategoryFliterObj = new object();
         private static IDataGeneric<CategoryFliter> categoryFliterInstance;
         public static IDataGeneric<CategoryFliter> CategoryFliterInstance
         {
             get
             {
-                lock (new object())
+                lock (lockCategoryFliterObj)
                 {
                     if (categoryFliterInstance == null) categoryFliterInstance = new DataGeneric<CategoryFliter>();
                 }
@@ -35,12 +37,13 @@ namespace Business
             }
         }
 
+        private static object lockCategoryInfoObj = new object();
         private static IDataGeneric<CategoryInfo> categoryInfoInstance;
         public static IDataGeneric<CategoryInfo> CategoryInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockCategoryInfoObj)
                 {
                     if (categoryInfoInstance == null) categoryInfoInstance = new DataGeneric<CategoryInfo>();
                 }
@@ -48,12 +51,13 @@ namespace Business
             }
         }
 
+        private static object lockCategoryInfoFliterObj = new object();
         private static IDataGeneric<CategoryInfoFliter> categoryInfoFliterInstance;
         public static IDataGeneric<CategoryInfoFliter> CategoryInfoFliterInstance
         {
             get
             {
-                lock (new object())
+                lock (lockCategoryInfoFliterObj)
                 {
                     if (categoryInfoFliterInstance == null) categoryInfoFliterInstance = new DataGeneric<CategoryInfoFliter>();
                 }
@@ -61,12 +65,13 @@ namespace Business
             }
         }
 
+        private static object lockCategoryModelObj = new object();
         private static IDataGeneric<CategoryModel> categoryModelInstance;
         public static IDataGeneric<CategoryModel> CategoryModelInstance
         {
             get
             {
-                lock (new object())
+                lock (lockCategoryModelObj)
                 {
                     if (categoryModelInstance == null) categoryModelInstance = new DataGeneric<CategoryModel>();
                 }
@@ -74,12 +79,13 @@ namespace Business
             }
         }
 
+        private static object lockUserObj = new object();
         private static IDataGeneric<User> userInstance;
         public static IDataGeneric<User> UserInstance
         {
             get
             {
-                lock (new object())
+                lock (lockUserObj)
                 {
                     if (userInstance == null) userInstance = new DataGeneric<User>();
                 }
@@ -87,12 +93,13 @@ namespace Business
             }
         }
 
+        private static object lockDateInfoObj = new object();
         private static IDataGeneric<DateInfo> dateInfoInstance;
         public static IDataGeneric<DateInfo> DateInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockDateInfoObj)
                 {
                     if (dateInfoInstance == null) dateInfoInstance = new DataGeneric<DateInfo>();
                 }
@@ -100,12 +107,13 @@ namespace Business
             }
         }
 
+        private static object lockFileInfoObj = new object();
         private static IDataGeneric<FileInfo> fileInfoInstance;
         public static IDataGeneric<FileInfo> FileInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockFileInfoObj)
                 {
                     if (fileInfoInstance == null) fileInfoInstance = new DataGeneric<FileInfo>();
                 }
@@ -113,12 +121,13 @@ namespace Business
             }
         }
 
+        private static object lockFliterObj = new object();
         private static IDataGeneric<Fliter> fliterInstance;
         public static IDataGeneric<Fliter> FliterInstance
         {
             get
             {
-                lock (new object())
+                lock (lockFliterObj)
                 {
                     if (fliterInstance == null) fliterInstance = new DataGeneric<Fliter>();
                 }
@@ -126,12 +135,13 @@ namespace Business
             }
         }
 
+        private static object lockGroupObj = new object();
         private static IDataGeneric<Group> groupInstance;
         public static IDataGeneric<Group> GroupInstance
         {
             get
             {
-                lock (new object())
+                lock (lockGroupObj)
                 {
                     if (groupInstance == null) groupInstance = new DataGeneric<Group>();
                 }
@@ -139,12 +149,13 @@ namespace Business
             }
         }
 
+        private static object lockImageInfoObj = new object();
         private static IDataGeneric<ImageInfo> imageInfoInstance;
         public static IDataGeneric<ImageInfo> ImageInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockImageInfoObj)
                 {
                     if (imageInfoInstance == null) imageInfoInstance = new DataGeneric<ImageInfo>();
                 }
@@ -152,12 +163,13 @@ namespace Business
             }
         }
 
+        private static object lockLogsObj = new object();
         private static IDataGeneric<Logs> logsInstance;
         public static IDataGeneric<Logs> LogsInstance
         {
             get
             {
-                lock (new object())
+                lock (lockLogsObj)
                 {
                     if (logsInstance == null) logsInstance = new DataGeneric<Logs>();
                 }
@@ -165,12 +177,13 @@ namespace Business
             }
         }
 
+        private static object lockModelsObj = new object();
         private static IDataGeneric<Models> modelsInstance;
         public static IDataGeneric<Models> ModelsInstance
         {
             get
             {
-                lock (new object())
+                lock (lockModelsObj)
                 {
                     if (modelsInstance == null) modelsInstance = new DataGeneric<Models>();
                 }
@@ -178,12 +191,13 @@ namespace Business
             }
         }
 
+        private static object lockPrivilegeObj = new object();
         private static IDataGeneric<Privilege> privilegeInstance;
         public static IDataGeneric<Privilege> PrivilegeInstance
         {
             get
             {
-                lock (new object())
+                lock (lockPrivilegeObj)
                 {
                     if (privilegeInstance == null) privilegeInstance = new DataGeneric<Privilege>();
                 }
@@ -191,12 +205,13 @@ namespace Business
             }
         }
 
+        private static object lockShortTextInfoObj = new object();
         private static IDataGeneric<ShortTextInfo> shortTextInfoInstance;
         public static IDataGeneric<ShortTextInfo> ShortTextInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockShortTextInfoObj)
                 {
                     if (shortTextInfoInstance == null) shortTextInfoInstance = new DataGeneric<ShortTextInfo>();
                 }
@@ -204,12 +219,13 @@ namespace Business
             }
         }
 
+        private static object lockTextInfoObj = new object();
         private static IDataGeneric<TextInfo> textInfoInstance;
         public static IDataGeneric<TextInfo> TextInfoInstance
         {
             get
             {
-                lock (new object())
+                lock (lockTextInfoObj)
                 {
                     if (textInfoInstance == null) textInfoInstance = new DataGeneric<TextInfo>();
                 }
